@@ -1,0 +1,205 @@
+<div class="container p-1">
+
+    <div id="headingTable" class="row pt-4 eCommerce-sidebar-margin-expand">
+        <div class="col-2">
+            <h4 class="eCommerce-register-label">My Orders</h4>
+        </div>
+    </div>
+    &nbsp;&nbsp;
+
+    <br>
+
+    <div id="orderhistoryTable" class="col-md-12 mb-3 eCommerce-sidebar-margin-expand" style="width: auto;">
+        <ngx-datatable class='bootstrap no-detail-row material eCommerce-datatable-material container striped row-border' [footerHeight]="50" [rowHeight]="'auto'"    
+                        style="border: 1px solid #121212e6;" [rows]='orderData' [count]="orderCount" [limit]="orderLimit" [rowHeight]="50">
+
+            <ngx-datatable-column name="ID" prop="id" [canAutoResize]="true" [maxWidth]="50">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" ngbTooltip="{{row.id}}">{{row.id}}</a> 
+                    </div>
+                </ng-template>                    
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="OrderId" prop="userOrderid" [canAutoResize]="true" [resizeable]="true" [width]="orderWidth" [maxWidth]="orderWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#orderDetailsModal" ngbTooltip="{{row.userOrderid}}" (click)="onOrderSelect(row)">{{row.userOrderid}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Address" prop="address" [canAutoResize]="true" [resizeable]="true" [width]="addressWidth" [maxWidth]="addressWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.address}}">{{row.address}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Price(₹)" prop="price" [canAutoResize]="true" [resizeable]="true" [maxWidth]="80">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.count}}">{{row.price}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="OrderDate" prop="orderDate" [canAutoResize]="true" [resizeable]="true" [maxWidth]="220">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.orderDate}}">{{row.orderDate}}</a> 
+                    </div>
+                </ng-template>     
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="DeliveryDate" prop="deliveryDate" [canAutoResize]="true" [resizeable]="true" [maxWidth]="220">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.deliveryDate}}">{{row.deliveryDate}}</a> 
+                    </div>
+                </ng-template>     
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="Cancel" prop="cancel" [canAutoResize]="true" [resizeable]="true" [maxWidth]="145">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <!--<a class="btn eCommerce-nav-button my-2 my-sm-0" style="margin-bottom: 21px;" disabled="true" ngbTooltip="Cancel Order">Cancel Order</a>-->
+                        <button id="cancelBtn" class="btn eCommerce-small-button-two d-flex justify-content-center btn-sm" [disabled]="row.cancel" data-bs-toggle="modal" data-bs-target="#cancelOrderModal" ngbTooltip="Cancel Order" (click)="onCancelOrderSelect(row)">
+                            Cancel Order
+                        </button>
+                    </div>
+                </ng-template>     
+            </ngx-datatable-column>             
+            
+            <ngx-datatable-column name="OrderStatus" prop="orderStatus" [canAutoResize]="true" [resizeable]="true" [maxWidth]="135">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.orderStatus}}"><b>{{row.orderStatus}}</b></a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>               
+            
+        </ngx-datatable>
+    </div>
+
+    <!-- Modal Cancel Order-->
+    <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content eCommerce-background">
+            
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5" id="passwordModalLabel">Cancel Order</h3>
+                </div>
+                
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        <div class="row">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-10">
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Are you sure you want to cancel the order? 50 % cancellation charges will be applied on refund.</label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>                            
+                        </div>
+
+                        <div class="row eCommerce-login-top-padding">
+                            <div class="col-md-6" style="margin-top: 13px; margin-bottom: 13px;">
+                                <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'" (click)="onClickCancelOrder()">Yes</button>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 13px; margin-bottom: 13px;">
+                                <button class="btn eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">Cancel</button>
+                            </div>                
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>          
+    <!-- Modal Cancel Order-->
+
+    <!-- Modal Order Details-->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content eCommerce-background">
+            
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5">Order Details - {{selectedUserOrderId}}</h3>
+                </div>
+                
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        <br>
+                        <div class="row">
+                            <div id="orderdetailsTable" class="col-md-12 mb-3" style="width: auto;">
+                                <ngx-datatable class='bootstrap no-detail-row material eCommerce-datatable-material container striped row-border' [footerHeight]="50" [rowHeight]="'auto'"    
+                                                style="border: 1px solid #121212e6;" [rows]='orderDetailsData' [count]="orderCount" [limit]="orderLimit" [rowHeight]="50">
+                        
+                                    <ngx-datatable-column name="ID" prop="id" [canAutoResize]="true" [maxWidth]="50">
+                                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                                            <div class="text-left">    
+                                                <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" ngbTooltip="{{row.id}}">{{row.id}}</a> 
+                                            </div>
+                                        </ng-template>                    
+                                    </ngx-datatable-column>
+
+                                    <ngx-datatable-column name="Title" prop="title" [canAutoResize]="true" [resizeable]="true" [width]="260" [maxWidth]="296">
+                                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                                            <div class="text-left">    
+                                                <a ngbTooltip="{{row.title}}">{{row.title}}</a> 
+                                            </div>    
+                                        </ng-template>                 
+                                    </ngx-datatable-column>                                    
+                        
+                                    <ngx-datatable-column name="Color" prop="color" [canAutoResize]="true" [resizeable]="true" [width]="100" [maxWidth]="296">
+                                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                                            <div class="text-left">    
+                                                <a ngbTooltip="{{row.color}}">{{row.color}}</a> 
+                                            </div>    
+                                        </ng-template>                 
+                                    </ngx-datatable-column>
+
+                                    <ngx-datatable-column name="Size" prop="size" [canAutoResize]="true" [resizeable]="true" [width]="100" [maxWidth]="296">
+                                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                                            <div class="text-left">    
+                                                <a ngbTooltip="{{row.size}}">{{row.size}}</a> 
+                                            </div>    
+                                        </ng-template>                 
+                                    </ngx-datatable-column>
+
+                                    <ngx-datatable-column name="Price(₹)" prop="price" [canAutoResize]="true" [resizeable]="true" [width]="100" [maxWidth]="296">
+                                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                                            <div class="text-left">    
+                                                <a ngbTooltip="{{row.price}}">{{row.price}}</a> 
+                                            </div>    
+                                        </ng-template>                 
+                                    </ngx-datatable-column>
+
+                                    <ngx-datatable-column name="Quantity" prop="quantity" [canAutoResize]="true" [resizeable]="true" [width]="100" [maxWidth]="296">
+                                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                                            <div class="text-left">    
+                                                <a ngbTooltip="{{row.quantity}}">{{row.quantity}}</a> 
+                                            </div>    
+                                        </ng-template>                 
+                                    </ngx-datatable-column>                                    
+
+                                </ngx-datatable>
+                            </div>                           
+                        </div>
+
+                        <div class="row eCommerce-login-top-padding">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10" style="margin-top: 13px; margin-bottom: 13px;">
+                                <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">Ok</button>
+                            </div>
+                            <div class="col-md-1"></div>              
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>          
+    <!--Modal Order Details-->    
+
+</div>

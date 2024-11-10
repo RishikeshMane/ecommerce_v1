@@ -1,0 +1,263 @@
+<div class="container p-1">
+
+    <div id="headingTable" class="row pt-4 eCommerce-sidebar-margin-expand">
+        <div class="col-2">
+            <h4 class="eCommerce-register-label">Order Date :</h4>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3">
+                    <button class="btn eCommerce-nav-button-change d-flex justify-content-center btn-sm" (click)="from.toggle()">From&nbsp;<i class="bi bi-calendar-month"></i>&nbsp;<i class="bi bi-caret-down-square-fill"></i></button>   
+                </div>
+                <div class="col-4">
+                    <input id='fromDate' type="text" readonly ngbDatepicker placeholder="yyyy-mm-dd" (dateSelect)="onFromDateSelect($event)" #from="ngbDatepicker"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3">
+                    <button class="btn eCommerce-nav-button-change d-flex justify-content-center btn-sm" (click)="to.toggle()">To&nbsp;&nbsp;<i class="bi bi-calendar-month"></i>&nbsp;&nbsp;<i class="bi bi-caret-down-square-fill"></i></button>
+                </div>
+                <div class="col-4">
+                    <input id='toDate' type="text" readonly ngbDatepicker placeholder="yyyy-mm-dd" (dateSelect)="onToDateSelect($event)" #to="ngbDatepicker"/>
+                </div>  
+            </div>
+        </div>
+    </div>
+    &nbsp;&nbsp;
+
+    <br>
+
+    <div id="orderTable" class="col-md-12 mb-3 eCommerce-sidebar-margin-expand" style="width: auto;">
+        <ngx-datatable class='bootstrap no-detail-row material eCommerce-datatable-material container striped row-border' [footerHeight]="50" [rowHeight]="'auto'"    
+                        style="border: 1px solid #121212e6;" [rows]='orderData' [count]="orderCount" [limit]="orderLimit" [rowHeight]="50">
+
+            <ngx-datatable-column name="ID" prop="id" [canAutoResize]="true" [maxWidth]="50">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#showOrder" ngbTooltip="{{row.id}}" (click)="onOrderSelect(row)">{{row.id}}</a> 
+                    </div>
+                </ng-template>                    
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="OrderId" prop="userOrderid" [canAutoResize]="true" [resizeable]="true" [maxWidth]="orderWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#showOrder" ngbTooltip="{{row.userOrderid}}" data-bs-toggle="modal" data-bs-target="#showOrder" (click)="onOrderSelect(row)">{{row.userOrderid}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="ProductId" prop="productid" [canAutoResize]="true" [resizeable]="true" [maxWidth]="90">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.productid}}">{{row.productid}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="Title" prop="title" [canAutoResize]="true" [resizeable]="true" [maxWidth]="titleWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.title}}">{{row.title}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Address" prop="address" [canAutoResize]="true" [resizeable]="true" [maxWidth]="addressWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.address}}">{{row.address}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Color" prop="color" [canAutoResize]="true" [resizeable]="true" [maxWidth]="colorWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.color}}">{{row.color}}</a> 
+                    </div>    
+                </ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="Size" prop="size" [canAutoResize]="true" [resizeable]="true" [maxWidth]="sizeWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.size}}">{{row.size}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Price(₹)" prop="price" [canAutoResize]="true" [resizeable]="true" [maxWidth]="70">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.count}}">{{row.price}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>            
+            
+            <ngx-datatable-column name="Count" prop="count" [canAutoResize]="true" [resizeable]="true" [maxWidth]="70">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.count}}">{{row.count}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="OrderDate" prop="orderDate" [canAutoResize]="true" [resizeable]="true" [maxWidth]="130">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.orderDate}}">{{row.orderDate}}</a> 
+                    </div>
+                </ng-template>     
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="DeliveryDate" prop="deliveryDate" [canAutoResize]="true" [resizeable]="true" [maxWidth]="130">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="{{row.deliveryDate}}">{{row.deliveryDate}}</a> 
+                    </div>
+                </ng-template>     
+            </ngx-datatable-column>              
+            
+            <ngx-datatable-column name="OrderStatus" prop="orderStatus" [canAutoResize]="true" [resizeable]="true" [maxWidth]="130">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#showOrder" ngbTooltip="{{row.orderStatus}}" (click)="onOrderSelect(row)">{{row.orderStatus}}</a> 
+                    </div>    
+                </ng-template>                 
+            </ngx-datatable-column>               
+            
+        </ngx-datatable>
+    </div>
+
+    <!-- Modal Order -->
+    <form enctype="multipart/form-data">
+        <div class="modal fade" id="showOrder" tabindex="-1" aria-labelledby="showOrderLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content eCommerce-background">
+                    <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                        <h3 class="modal-title fs-5" id="userOrderLabel">{{this.userOrderDetail.userOrderId}}</h3>                
+                    </div>
+                    
+                    <div class="modal-body eCommerce-background eCommerce-round-control">
+    
+                        <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                            <!-- Product Id -->
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Product Id:</label>
+                                </div>
+                                <div class="col-md-10" style="margin-top: 13px;">
+                                    <input type="text" #productIdLabel="ngModel" class="form-control eCommerce-round-control" readonly name="productId" [(ngModel)]="userOrderDetail.userProductId"/>
+                                </div>
+                            </div>
+                            <!-- Product Id -->
+
+                            <!-- Title -->
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Title:</label>
+                                </div>
+                                <div class="col-md-10" style="margin-top: 13px;">
+                                    <input type="text" #titleLabel="ngModel" class="form-control eCommerce-round-control" readonly name="title" [(ngModel)]="userOrderDetail.title"/>
+                                </div>
+                            </div>
+                            <!-- Title -->
+                            
+                            <!-- Address -->
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Address:</label>
+                                </div>
+                                <div class="col-md-10" style="margin-top: 13px;">
+                                    <textarea #addressLabel="ngModel" class="form-control eCommerce-round-control" readonly name="address" [(ngModel)]="userOrderDetail.address"></textarea>
+                                </div>
+                            </div>
+                            <!-- Address -->
+
+                            <!-- Color / Size -->
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Color:</label>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 13px;">
+                                    <input type="text" #colorLabel="ngModel" class="form-control eCommerce-round-control" readonly name="color" [(ngModel)]="userOrderDetail.color"/>
+                                </div>
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Size:</label>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 13px;">
+                                    <input type="text" #sizeLabel="ngModel" class="form-control eCommerce-round-control" readonly name="size" [(ngModel)]="userOrderDetail.size"/>
+                                </div>                            
+                            </div>
+                            <!-- Color / Size -->
+
+                            <!-- Price / Count -->
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Price:</label>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 13px;">
+                                    <input type="text" #priceLabel="ngModel" class="form-control eCommerce-round-control" readonly name="price" [(ngModel)]="userOrderDetail.price"/>
+                                </div>
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Count:</label>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 13px;">
+                                    <input type="text" #countLabel="ngModel" class="form-control eCommerce-round-control" readonly name="count" [(ngModel)]="userOrderDetail.count"/>
+                                </div>
+                            </div>
+                            <!-- Price / Count -->
+                            
+                            <!-- Order Date / Delivery Date -->
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Order Date:</label>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 13px;">
+                                    <input type="text" #orderdateLabel="ngModel" class="form-control eCommerce-round-control" readonly name="orderdate" [(ngModel)]="userOrderDetail.orderDate"/>
+                                </div>
+
+                                <div class="col-2" style="margin-top: 15px;">
+                                    <button class="btn eCommerce-nav-button-change d-flex justify-content-center btn-sm" (click)="deliveryDate.toggle()">Delivery&nbsp;Date&nbsp;<i class="bi bi-caret-down-square-fill"></i></button>
+                                </div>
+                                <div class="col-3" style="margin-top: 15px;">
+                                    <input id='deliveryDate' type="text" value="{{dDate}}" readonly ngbDatepicker format="mm-dd-yyyy" placeholder="yyyy-mm-dd" (dateSelect)="onDeliveryDateSelect($event)" #deliveryDate="ngbDatepicker"/>
+                                </div>
+                            </div>
+                            <!-- Order Date / Delivery Date -->
+
+                            <!-- Order Status -->
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 13px;"> 
+                                    <label class="eCommerce-anchor-background eCommerce-control-top-padding">Order Status:</label>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 10px">
+                                    <select (change)="onSelectDeliveryStatus(selectDeliveryStatus.value)" style="width: 100%;" required [class.is-invalid]="true" #selectDeliveryStatus="ngModel" class="custom-select eCommerce-control-padding" name="deliveryStatus" [(ngModel)]="selectedDeliveryStatus">
+                                        <option *ngFor="let deliveryStatus of deliveryStatuses" title="{{deliveryStatus}}">{{deliveryStatus}}</option> 
+                                    </select>
+                                </div> 
+                                <div class="col-md-3" style="margin-top: 15px;">
+                                    <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'" (click)="onUpdateOrderStatus()">Update OrderStatus</button>
+                                </div>
+        
+                                <div class="col-md-3" style="margin-top: 15px;">
+                                    <button class="btn d-flex justify-content-center eCommerce-box-shadow eCommerce-small-button-two" style="width:100%;" [attr.data-bs-dismiss]="'modal'" (click)="onCancel()">Cancel</button>
+                                </div>  
+                            </div>
+                            <!-- Order Status -->                             
+
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Modal Order -->
+
+</div>

@@ -1,0 +1,157 @@
+<div class="container-fluid">
+
+    <!-- Product Image -->
+    <div id="productshome" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-12">
+                <img src="{{homeImageUrl}}" class="card-img-top" style="max-width: 100%; max-height: 100%;"/>
+            </div>
+        </div>
+    </div>
+    <!-- Product Image -->
+    <br>
+
+    <!-- Breadcrumb -->
+    <div id="breadcrumb" class="eCommerce-sidebar-home-expand">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumbIcon" ><a class="eCommerce-register-label" routerLink="home">Home&nbsp;</a></li>
+                <li class="bi-chevron-double-right breadcrumbIcon eCommerce-register-label" aria-current="page">&nbsp;Category&nbsp;</li>
+            </ol>
+        </nav>
+    </div>    
+    <!-- Breadcrumb -->    
+
+    <!-- Title -->
+    <div id="productstitle" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-2"></div> 
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 pl-8">    
+                <label class="eCommerce-home-best-selling d-flex justify-content-center" style="text-align: center;"><b>{{categoryName}} - {{subCategoryName}}</b></label>
+            </div>
+            <div class="col-2"></div>    
+        </div>
+    </div>    
+    <!-- Title -->
+
+    <!-- Description -->
+    <div id="productsdescription" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-1"></div> 
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 pl-10">
+                <label class="eCommerce-home-heading d-flex justify-content-center" style="text-align: center;">{{getDescription()}}</label> 
+            </div>
+            <div class="col-1"></div>    
+        </div>
+    </div>
+    <!-- Description -->
+    <hr style="width: 100%; text-align: center;">
+
+    <!-- Filter -->
+    <div id="filter" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <!--<div class="col-1"></div>-->
+            <div class="col-2" style="width:fit-content;">
+                <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header d-flex justify-content-center"><b>Select Products by :</b></label>                
+            </div>
+            <div class="col-3" style="width:fit-content;">
+                <select (change)="onSelectCity(selectCity.value)" #selectCity="ngModel" class="custom-select eCommerce-combobox d-flex justify-content-center" name="city" [(ngModel)]="city">    
+                    <option value="">--City--</option>
+                    <option *ngFor="let city of cities" title="{{city}}">{{city}}</option>
+                </select>                 
+            </div> 
+            <div class="col-3" style="width:fit-content;">
+                <select (change)="onSelectPincode(selectPincode.value)" #selectPincode="ngModel" class="custom-select eCommerce-combobox d-flex justify-content-center" name="pincode" [(ngModel)]="pincode">    
+                    <option value="">--Pincode--</option>
+                    <option *ngFor="let pincode of pincodes">{{pincode}}</option>
+                </select>                 
+            </div>
+            <div class="col-3" style="width:fit-content;">
+                <select (change)="onSelectStore(selectStore.value)" #selectStore="ngModel" class="custom-select eCommerce-combobox d-flex justify-content-center" name="store" [(ngModel)]="store">    
+                    <option value="">--Stores--</option>
+                    <option *ngFor="let store of stores" title="{{store}}">{{store}}</option>
+                </select>                 
+            </div>
+            <div class="col-2">
+                <!--<label class="eCommerce-anchor-background-header" style="margin-top: 10px;">Sort by</label>-->
+            </div>
+            <div class="col-1 d-flex justify-content-right" style="width:fit-content;">
+                <select (change)="onSelectSort(selectSort.value)" #selectSort="ngModel" class="custom-select eCommerce-combobox d-flex justify-content-center" name="sort" [(ngModel)]="sort">    
+                    <option value="">--Sort by--</option>
+                    <option *ngFor="let sort of sorts">{{sort}}</option>
+                </select>
+            </div>
+            <div class="col-1 d-flex justify-content-right" style="width:fit-content;">
+                <a (click)="onClickSort()" ngbTooltip="Up / Down" placement="top" class="btn eCommerce-nav-button d-flex justify-content-left">
+                    <b><i id="sort" class="bi bi-sort-alpha-down"></i></b>
+                </a>    
+            </div>
+            <!--<div class="col-1"></div>-->     
+        </div>
+    </div>
+    <!-- Filter -->
+    <hr style="width: 100%; text-align: center;">
+
+    <!-- Products -->  
+    <div id="products" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" *ngFor="let product of viewproducts.products">
+                <div class="row p-2">
+                    <div class="col-xl-12" style="border: 1px solid #9e9a9ac2;">
+                        <div class="card">
+                            <img src="{{getImageName(product)}}" ngbTooltip="{{getTooltipImageName(product)}}" class="card-img-top eCommerce-home-card-image" style="background-color:white; object-fit: cover; width: 100%; height: 250px; max-width: 100%; max-height: 100%;" (click)="onProductClick(product.productId, product.store, product.pincode, product.city)"/>
+                        </div>
+                        &nbsp;
+                        <!--
+                        <div class="pl-1">
+                            <label class="eCommerce-products-title d-flex justify-content-center"><b>{{getImageName(product)}}</b></label>                        
+                        </div>
+                        -->                                                                  
+                        <div class="pl-1">
+                            <label class="eCommerce-products-title d-flex justify-content-center"><b>{{product.title}}</b></label>                        
+                        </div>
+                        <div class="pl-1">
+                            <label class="eCommerce-products-inventory d-flex justify-content-center"><b>{{product.count}} items left</b></label>                           
+                        </div>
+                        <div class="pl-1 d-flex justify-content-center">
+                            <div>
+                                <label class="eCommerce-products-price"><b>Price :</b></label>  
+                                <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="eCommerce-products-price bi bi-currency-rupee" viewBox="0 0 16 16">
+                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                                </svg>          
+                                <label class="eCommerce-products-price"><b>{{product.price}}.00</b></label>                           
+                            </div>
+                        </div>
+                        
+                        <div class="pl-1">
+                            <label class="eCommerce-products-city d-flex justify-content-center"><b>City : {{product.city}}</b></label>                           
+                        </div>
+                        <div class="pl-1">
+                            <label class="eCommerce-products-pincode d-flex justify-content-center"><b>Pincode : {{product.pincode}}</b></label>                           
+                        </div>
+                        <div class="pl-1">
+                            <label class="eCommerce-products-store d-flex justify-content-center"><b>Store:{{product.store}}</b></label>                           
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- Products -->
+    <br>
+    <!-- About Bagwani -->
+    <div id="about" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-about></ecommerce-product-about>
+    </div>
+    <!-- About Bagwani -->
+
+    &nbsp;
+    
+    <!-- Navigation Pane -->
+    <div id="navbar" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-navigation></ecommerce-product-navigation>
+    </div>
+    <!-- Navigation Pane -->    
+    <br>
+
+</div>

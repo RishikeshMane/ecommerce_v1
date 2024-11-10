@@ -1,0 +1,24 @@
+<div class="row">
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-2 eCommerce-box justify-content-center" style="margin-top: 13px;" ngbTooltip="{{sizeTitle}}" placement="right">
+        <label class="justify-content-center" style="margin-top: 1px;">{{size}}</label>
+    </div>
+    &nbsp;&nbsp;
+    <div class="col-md-2 eCommerce-box justify-content-center" style="margin-top: 13px;">
+        <label class="justify-content-center" style="margin-top: 1px;">{{color}}</label>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-md-1" style="margin-top: 13px;">
+        <a class="btn btn-sm" [attr.style]="'background-color:rgb('+varColor[0].red+', '+varColor[0].green+', '+varColor[0].blue+'); width:50%; height: 60%;border: 1px solid #121212e6;'">
+        </a>
+    </div>
+
+    <!--<div class="col-md-1"></div>-->
+    <div class="col-md-4" style="margin-top: 13px;">
+        <a (click)="onUploadImage()" [attr.class]="'btn btn-sm d-flex justify-content-center ' + imageClickStatus + ' eCommerce-box-shadow'" style="width:100%;">
+            <i class="bi bi-binoculars"></i>&nbsp; Images
+        </a>  
+    </div>      
+</div>

@@ -1,0 +1,51 @@
+/** Customized Style sheet for ngx-datatable*/
+
+.ngx-datatable.eCommerce-datatable-material{
+    background: beige;
+    box-shadow: 2px 2px 7px rgb(51, 155, 124), 5px 5px 7px rgb(51, 155, 124);
+}
+
+.ngx-datatable.eCommerce-datatable-material .datatable-header {
+    border-bottom: 1px solid rgba(188, 241, 75, 0.9);
+}
+
+.ngx-datatable.eCommerce-datatable-material .datatable-header .datatable-header-cell {
+    text-align: center;
+    background-color: rgb(51, 155, 124);
+    color: rgba(16, 6, 53, 0.892);
+    vertical-align: top;
+    padding: 0.0rem 0.0rem;
+    font-size: 16px;
+}
+
+.ngx-datatable.eCommerce-datatable-material.striped .datatable-row-odd {
+    background: rgb(209, 216, 205);
+}
+
+.ngx-datatable.eCommerce-datatable-material.striped .datatable-row-even {
+    background: #9ca398c7; 
+}
+
+.ngx-datatable.eCommerce-datatable-material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+    background: rgb(125, 160, 167);
+}
+
+.ngx-datatable.eCommerce-datatable-material .datatable-body .datatable-body-row .datatable-body-cell {
+    text-align: center;
+    padding: .9rem 1.2rem;
+    vertical-align: top;
+    border-top: 0;
+    color: rgb(10, 10, 10);
+    transition: width 0.3s ease;
+    font-size: 14px;
+    font-weight: 500; 
+}
+
+.ngx-datatable.eCommerce-datatable-material .datatable-footer {
+    border-top: 1px solid rgb(10, 10, 10);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(10, 10, 10); 
+}
+
+

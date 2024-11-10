@@ -1,0 +1,123 @@
+<div class="container-fluid">
+
+    <!-- Product Image -->
+    <div id="orderstatushome" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-12">
+                <img src="{{orderStatusImageUrl}}" class="card-img-top" style="max-width: 100%; max-height: 100%;"/>
+            </div>
+        </div>
+    </div>
+    <!-- Product Image -->
+    <br>  
+
+    <!-- Title -->
+    <div id="orderstatustitle" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-2"></div> 
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 pl-8">    
+                <label class="eCommerce-home-best-selling d-flex justify-content-center" style="text-align: center;"><b><i class="bi bi-globe2"></i></b>&nbsp;<b>Order Status&nbsp;</b><b><i class="bi bi-globe2"></i></b></label>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>    
+    <!-- Title -->
+
+    <hr style="width: 100%; text-align: center;">
+
+    <!-- Description -->
+    <div id="orderstatusdescription" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-3"></div> 
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="margin-top: 13px;">
+                <label class="eCommerce-home-heading d-flex justify-content-center" style="text-align: center;"><b>Please enter Order Id :</b></label>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="margin-top: 8px;">
+                <input type="text" #orderIdLabel="ngModel" placeholder="Enter Order Id" class="form-control eCommerce-round-control" name="orderId" [(ngModel)]="orderId"/>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="margin-top: 8px;">
+                <a class="btn eCommerce-nav-button my-2 my-sm-0" (click)="checkOrder()"><b>Check Order</b></a>
+            </div>            
+            <div class="col-3"></div>
+        </div>
+    </div>    
+    <!-- Description -->
+
+    &nbsp;
+    <div id="orderstatus" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-2" *ngFor="let orderDetail of orderDetails; index as i">
+                <div class="row p-2">
+                    <div class="col-xl-12" style="border: 1px solid #9e9a9ac2;">
+                        <div class="pl-1">
+                            <label class="eCommerce-products-title d-flex justify-content-center" style="color: rgb(123, 120, 128);"><b>Product Id :- {{orderDetail.userProductId}}</b></label>                     
+                        </div>                        
+                        <div class="pl-1">
+                            <label class="eCommerce-products-title d-flex justify-content-center"><b>{{orderDetail.title}}</b></label>                     
+                        </div>
+                        &nbsp;
+                        <!--
+                        <div style="border: 1px solid #eaf913c2;">
+                            <canvas #orderCanvas id="orderDetail.productId" style="border: 1px solid #20f96cc2;">charts[i]</canvas>
+                        </div>
+                        -->
+                        <div class="pl-1">
+                            <label class="eCommerce-orderstatus-on d-flex justify-content"><b><i class="bi bi-arrow-right-circle-fill"></i></b><b>&nbsp;&nbsp;&nbsp;Order Received&nbsp;&nbsp;</b></label>                     
+                        </div>
+                        <div *ngIf="(orderDetail.deliveryStatus === 'Delivered' || orderDetail.deliveryStatus === 'Out for Delivery')" class="pl-1">
+                            <label class="eCommerce-orderstatus-on d-flex justify-content"><b><i class="bi bi-arrow-down-short"></i></b></label>                     
+                        </div>                     
+                        <div *ngIf="(orderDetail.deliveryStatus === 'Delivered' || orderDetail.deliveryStatus === 'Out for Delivery')" class="pl-1">
+                            <label class="eCommerce-orderstatus-on d-flex justify-content"><b><i class="bi bi-arrow-right-circle-fill"></i></b><b>&nbsp;&nbsp;&nbsp;Out for Delivery</b></label>                     
+                        </div>
+                        <div *ngIf="!(orderDetail.deliveryStatus === 'Delivered' || orderDetail.deliveryStatus === 'Out for Delivery')" class="pl-1">
+                            <label class="eCommerce-orderstatus-off d-flex justify-content"><i class="bi bi-arrow-down-short"></i></label>                     
+                        </div>                     
+                        <div *ngIf="!(orderDetail.deliveryStatus === 'Delivered' || orderDetail.deliveryStatus === 'Out for Delivery')" class="pl-1">
+                            <label class="eCommerce-orderstatus-off d-flex justify-content"><i class="bi bi-arrow-right-circle-fill"></i>&nbsp;&nbsp;&nbsp;Out for Delivery</label>                     
+                        </div>                        
+                        <div *ngIf="(orderDetail.deliveryStatus === 'Delivered')" class="pl-1">
+                            <label class="eCommerce-orderstatus-on d-flex justify-content"><b><i class="bi bi-arrow-down-short"></i></b></label>                     
+                        </div>                        
+                        <div *ngIf="(orderDetail.deliveryStatus === 'Delivered')" class="pl-1">
+                            <label class="eCommerce-orderstatus-on d-flex justify-content"><b><i class="bi bi-arrow-right-circle-fill"></i></b><b>&nbsp;&nbsp;&nbsp;Delivered&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>                     
+                        </div>
+                        <div *ngIf="!(orderDetail.deliveryStatus === 'Delivered')" class="pl-1">
+                            <label class="eCommerce-orderstatus-off d-flex justify-content"><i class="bi bi-arrow-down-short"></i></label>                     
+                        </div>                        
+                        <div *ngIf="!(orderDetail.deliveryStatus === 'Delivered')" class="pl-1">
+                            <label class="eCommerce-orderstatus-off d-flex justify-content"><i class="bi bi-arrow-right-circle-fill"></i>&nbsp;&nbsp;&nbsp;Delivered&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>                     
+                        </div>                                                               
+                        &nbsp;                       
+                        <div class="pl-1">
+                            <label class="eCommerce-products-price d-flex justify-content-center"><b>Order&nbsp;Status&nbsp;-&nbsp;{{orderDetail.deliveryStatus}}</b></label>                        
+                        </div>                                             
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <!--<canvas id="933678-1"></canvas>-->
+    </div>    
+
+    <hr style="width: 100%; text-align: center;">
+
+    <br>
+    <!-- About Bagwani -->
+    <div id="about" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-about></ecommerce-product-about>
+    </div>
+    <!-- About Bagwani -->
+
+    &nbsp;
+    
+    <!-- Navigation Pane -->
+    <div id="navbar" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-navigation></ecommerce-product-navigation>
+    </div>
+    <!-- Navigation Pane -->    
+    <br>
+
+</div>

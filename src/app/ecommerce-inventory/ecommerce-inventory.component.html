@@ -1,0 +1,264 @@
+<div class="container p-1">
+    <nav id="navMain" class="navbar navbar-expand-lg eCommerce-sidebar-margin-expand">
+        <div class="container-fluid eCommerce-register-navigation d-flex justify-content-center">
+            <small class="eCommerce-login-failed-label"><b>Add your products and get the benefits of wide range of customers across country</b></small>
+        </div>
+    </nav>
+
+    <!--Product added successfully-->
+    <nav id="navSuccess" class="navbar navbar-expand-lg eCommerce-sidebar-margin-expand" [class.d-none]="productAdded">
+        <div class="container-fluid eCommerce-register-navigation d-flex justify-content-center">
+            <label class="eCommerce-register-navigation-label-success"><b>Product added successfully!!</b></label>
+        </div>
+    </nav>
+
+    <div id="headingTable" class="row pt-4 eCommerce-sidebar-margin-expand">
+        <div class="col-6">
+            <h4 class="eCommerce-anchor-background">Product List</h4>
+        </div>
+        <div class="col-6 text-end">
+            <a (click)="onAddNewProduct()" class="btn eCommerce-nav-button-change eCommerce-box-shadow" data-bs-toggle="modal" data-bs-target="#addProduct">
+                <i class="bi bi-plus-circle"></i> Add New Product
+            </a>
+        </div>
+    </div>
+    &nbsp;&nbsp;
+    <div id="productTable" class="col-md-12 mb-3 eCommerce-sidebar-margin-expand" style="width: auto;">
+        <ngx-datatable class='bootstrap no-detail-row material eCommerce-datatable-material container striped row-border' [footerHeight]="50" [rowHeight]="'auto'"    
+                        style="border: 1px solid #121212e6;" [rows]='productData' [count]="productCount" [limit]="productLimit" [rowHeight]="50">
+
+            <ngx-datatable-column name="ID" prop="id" [canAutoResize]="true" [maxWidth]="50">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" ngbTooltip="{{row.id}}" data-bs-toggle="modal" data-bs-target="#addProduct" (click)="onProductSelect(row)">{{row.id}}</a> 
+                    </div>    
+                </ng-template>                    
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="ProductId" prop="productid" [canAutoResize]="true" [resizeable]="true" [maxWidth]="120">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a class="mr-2 eCommerce-anchor" href="javascript:void(0);" ngbTooltip="{{row.productid}}" data-bs-toggle="modal" data-bs-target="#addProduct" (click)="onProductSelect(row)">{{row.productid}}</a> 
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Title" prop="title" [canAutoResize]="true" [resizeable]="true" [maxWidth]="150">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template> 
+                    <div class="text-left">
+                        <a ngbTooltip="{{row.title}}">{{row.title}}</a>
+                    </div>
+                </ng-template> 
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Description" prop="description" [canAutoResize]="true" [resizeable]="true" [width]="descriptionWidth" [maxWidth]="descriptionWidth">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template> 
+                    <div class="text-left">
+                        <a ngbTooltip="{{row.description}}">{{row.description}}</a>
+                    </div>
+                </ng-template> 
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Category" prop="category" [canAutoResize]="true" [resizeable]="true" [maxWidth]="100">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template> 
+                    <div class="text-left">
+                        <a ngbTooltip="{{row.category}}">{{row.category}}</a>
+                    </div>
+                </ng-template> 
+            </ngx-datatable-column>
+            <ngx-datatable-column name="SubCategory" prop="subcategory" [canAutoResize]="true" [resizeable]="true" [maxWidth]="140">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template> 
+                    <div class="text-left">
+                        <a ngbTooltip="{{row.subcategory}}">{{row.subcategory}}</a>
+                    </div>
+                </ng-template> 
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Count" prop="count" [canAutoResize]="true" [resizeable]="true" [width]="80" [maxWidth]="80">
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template> 
+                    <div class="text-left">
+                        <a ngbTooltip="{{row.count}}">{{row.count}}</a>
+                    </div>
+                </ng-template> 
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Edit" [canAutoResize]="true" [resizeable]="true" [maxWidth]="60">    
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="Edit" class="mr-2" style="color: black;" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#addProduct" (click)="onProductSelect(row)"><b><i class="bi bi-pencil-square"></i></b></a> 
+                    </div>
+                </ng-template>    
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Delete" [canAutoResize]="true" [resizeable]="true" [maxWidth]="60">    
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>    
+                    <div class="text-left">    
+                        <a ngbTooltip="Delete" class="mr-2" style="color: black;" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteProduct" (click)="onProductDelete(row)"><b><i class="bi bi-trash"></i></b></a> 
+                    </div>    
+                </ng-template>    
+            </ngx-datatable-column>                            
+
+        </ngx-datatable>
+    </div>
+    
+    <br>
+
+    <!-- Modal Product -->
+    <form enctype="multipart/form-data">
+    <div class="modal fade" id="addProduct" keyboard="false" backdrop="static" tabindex="-1" aria-labelledby="addProductLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content eCommerce-background">
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5" id="addProductLabel">{{title}}</h3>                
+                </div>
+                
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        <!-- Title -->
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Title:</label>
+                            </div>
+                            <!--<div class="col-md-1"></div>-->
+                            <div class="col-md-10" style="margin-top: 13px;">
+                                <input type="text" #productTitleLabel="ngModel" placeholder="Enter Product Title" class="form-control eCommerce-round-control" name="productTitle" [(ngModel)]="productDetail.title"/>
+                            </div>
+                        </div>
+                        <!-- Title -->
+
+                        <!-- Description -->
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Description:</label>
+                            </div>
+                            <!--<div class="col-md-1"></div>-->
+                            <div class="col-md-10" style="margin-top: 13px;">
+                                <textarea #ProductTitleLabel="ngModel" placeholder="Enter Product Description" class="form-control eCommerce-round-control" name="productDescription" [(ngModel)]="productDetail.description"></textarea>
+                            </div>
+                        </div>
+                        <!-- Description -->
+
+                        <!-- Product Variable -->
+                        <ecommerce-product-header></ecommerce-product-header>
+
+                        <div *ngFor="let variable of variables | keyvalue">
+                            <ecommerce-product-variable [key]="variable.value" [imagecheck]="imageStatusDetail" (deleteRow)="onDeleteRow($event)" (productvariable)="onUpdateProductVariable($event)" (showImages)="onShowImages($event)"></ecommerce-product-variable>
+                        </div>
+                        <!-- Product Variable -->
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="margin-top: 13px;">
+                                <button class="btn eCommerce-small-button-one d-flex justify-content-center eCommerce-box-shadow btn-sm" style="width:100%;" (click)="onAddProductVariable()">
+                                    <i class="bi bi-plus-circle"></i>&nbsp; Click and add more size color types &nbsp;<i class="bi bi-plus-circle"></i>
+                                </button>
+                            </div>
+                        </div>                        
+                
+                        <hr style="width: 100%; text-align: center;">
+
+                        <!-- Category / Subcategory -->
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background-header eCommerce-control-top-padding"><b>Category:</b></label>
+                            </div>                   
+                            
+                            <div class="col-md-3" style="margin-top: 10px;">
+                                <select (change)="onSelectCategory(selectcategory.value)" style="width: 100%;" required [class.is-invalid]="true" #selectcategory="ngModel" class="custom-select eCommerce-combobox" style="margin-top: 8px;" name="category" [(ngModel)]="selectedCategory">
+                                    <option *ngFor="let category of categories.category" title="{{category.category}}">{{category.category}}</option> 
+                                </select>
+                            </div>  
+                            
+                            <!--<div class="col-md-1"></div>-->
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background-header eCommerce-control-top-padding"><b>SubCategory:</b></label>
+                            </div>                   
+                            
+                            <div class="col-md-3" style="margin-top: 10px">
+                                <select (change)="onSelectSubCategory(selectsubCategory.value)" style="width: 100%;" required [class.is-invalid]="true" #selectsubCategory="ngModel" class="custom-select eCommerce-combobox" style="margin-top: 8px;" name="subcategory" [(ngModel)]="selectedSubCategory">
+                                    <option *ngFor="let subCategory of subCategories" title="{{subCategory}}">{{subCategory}}</option> 
+                                </select>
+                            </div>                              
+                        </div>
+                        <!-- Category / Subcategory -->                   
+                        
+                        <div class="row" style="margin-bottom: 13px;"></div>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 11px;"> 
+                        <label class="eCommerce-anchor-background-header" style="margin-top: 5px;" [class.d-none]="!imageStatusDetail.showhide"><b>Upload the images of aspect ratio <i>(3:4) <u>Portrait mode</u></i></b></label>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 3px; margin-bottom: 5px;"> 
+                        <label class="eCommerce-anchor-background-header" style="margin-top: 5px;" [class.d-none]="!imageStatusDetail.showhide"><b>Keep the Image size less than 15.0 mb for better performance</b></label>
+                    </div>                                          
+                    <!-- Images -->
+                    <div class="row eCommerce-login-top-padding eCommerce-box-shadow-inset eCommerce-image-vscroll" [class.d-none]="!imageStatusDetail.showhide" style="margin-left: 5px; margin-top: 1px; margin-left: 0px; margin-right: 0px;">
+                        <div class="card-body row container">
+                            <div class="container rounded p-2">
+                                <div class="row">
+                                    <div class= "col-md-2 eCommerce-image-container rounded" style="width: fit-content;" *ngFor="let productimage of productimages">
+                                        <img src="{{productimage.imageName}}" class="rounded eCommerce-product-image" style="margin-left: 2px;  margin-top: 1px;" data-toggle="tooltip" data-placement="top" [attr.title]="getImageName(productimage.imageName)"/>
+                                        <input type="checkbox" class="eCommerce-image-checkbox" data-toggle="toggle" (click)="onImageCheck(productimage, $event)"/>
+                                        <div>
+                                            <!--<small>{{getImageName(productimage)}}</small>-->
+                                        </div>
+                                    </div>
+                                    <div class= "col-md-2 eCommerce-image-container rounded" style="width: fit-content;">
+                                        <img src="./../../assets/images/deleteimage.png" class="rounded eCommerce-product-image eCommerce-image" style="margin-left: 2px; margin-top: 0px;" ngbTooltip="Delete selected images" placement="right" (click)="onDeleteImages()"/>
+                                    </div>
+                                    <div class= "col-md-2 eCommerce-image-container rounded" style="width: fit-content;">
+                                        <img src="./../../assets/images/addimage.png" class="rounded eCommerce-product-image eCommerce-image" style="margin-left: 2px; margin-top: 0px;" ngbTooltip="Add image" placement="left" (click)="selectFile.click()"/>
+                                    </div>
+                                    <div [class.d-none]="true">
+                                        <input type="file" class="file-upload" id="uploadfile" (change)="onAddNewImage($event)" accept="image/png, image/jpeg, image/gif" #selectFile/> 
+                                    </div>                                    
+                                </div>                                                                    
+                            </div>                            
+                        </div>
+                    </div>
+                    <!-- Images -->
+                    
+                    <div class="row eCommerce-login-top-padding">
+                        <div class="col-md-6" style="margin-bottom: 5px; margin-top: 5px;">
+                            <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'" (click)="onUpsertProduct()">{{this.productDetail.addUpdate}}</button>
+                        </div>
+
+                        <div class="col-md-6" style="margin-bottom: 5px; margin-top: 5px;">
+                            <button class="btn d-flex justify-content-center eCommerce-box-shadow eCommerce-small-button-two" style="width:100%;" [attr.data-bs-dismiss]="'modal'" (click)="onCancelProduct()">Cancel</button>
+                        </div>                        
+                    </div>
+
+                </div>  
+            </div>
+        </div>
+    </div>
+    </form>         
+    <!-- Modal Product-->
+
+    <br>
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteProduct" tabindex="-1" aria-labelledby="deleteProductLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content eCommerce-background">
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5" id="deleteProductLabel">Delete Product?</h3>                 
+                </div>
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        <div class="row" style="margin-bottom: 13px;">
+                            <div class="col-md-6" style="margin-top: 13px;"> 
+                                <a (click)="productDelete()" class="btn btn-sm eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">
+                                    Yes
+                                </a>        
+                            </div>
+                            <div class="col-md-6" style="margin-top: 13px;"> 
+                                <a class="btn btn-sm eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">
+                                    No
+                                </a>
+                            </div>                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+    <!-- Modal Delete -->    
+
+</div>

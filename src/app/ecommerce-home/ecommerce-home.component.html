@@ -1,0 +1,479 @@
+<div class="container-fluid">
+
+    <!-- Home Image -->
+    <div id="homeImage" class="eCommerce-sidebar-home-expand">
+        <ngb-carousel *ngIf="true" [interval]="9999">
+            <ng-template ngbSlide>
+                <div class="wrapper">
+                    <img src="{{images1}}" alt="Bagwani">
+                </div>
+                <div class="carousel-caption">
+                    <h3>{{title}}</h3>
+                    <p>Enjoy the unique experience of gardening</p>
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <div class="wrapper">
+                    <img src="{{images2}}" alt="Gardening">
+                </div>
+                <div class="carousel-caption">
+                    <h3>{{title}}</h3>
+                    <p>Enjoy the unique experience of gardening</p>
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <div class="wrapper">
+                    <img src="{{images3}}"  alt="Gardenia">
+                </div>
+                <div class="carousel-caption">
+                    <h3>{{title}}</h3>
+                    <p>Enjoy the unique experience of gardening</p>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+    </div>
+    <!-- Home Image -->    
+
+    &nbsp;
+    <div class="col-12" style="width:100%; height:80px" class="text-center">
+        <img id="art" src="{{art}}" class="card-img-top rounded eCommerce-sidebar-home-expand" style="max-width: 30%; max-height: 70px;"/>
+    </div>
+
+    <hr>
+
+    <!-- Choose by Category -->
+    <div id="category" class="eCommerce-sidebar-home-expand">
+        <label class="eCommerce-home-best-selling"><b>Our Products by Category</b></label>
+    </div>
+    <div id="cardOne" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3" style="margin-top: 5px;">
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" style="background-color:white; height:365px; width:32%; margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 1)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 1)}}</label>
+                </div>
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(0, 0)}}" ngbTooltip="{{getTooltipImageName(0, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(0, 0)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(0, 1)}}" ngbTooltip="{{getTooltipImageName(0, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(0, 1)" />
+                    </div>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(0, 2)}}" ngbTooltip="{{getTooltipImageName(0, 2)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(0, 2)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(0, 3)}}" ngbTooltip="{{getTooltipImageName(0, 3)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(0, 3)" />
+                    </div>                   
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" height="100%" width="100%" style="background-color:white; width:32%; margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="d-flex justify-content-center eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 2)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 2)}}</label>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(1, 0)}}" ngbTooltip="{{getTooltipImageName(1, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(1, 0)"/>
+                    </div>
+                </div>
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(1, 1)}}" ngbTooltip="{{getTooltipImageName(1, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(1, 1)"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" style="background-color:white; width:33%;  margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 3)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 3)}}</label>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(2, 0)}}" ngbTooltip="{{getTooltipImageName(2, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(2, 0)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(2, 1)}}" ngbTooltip="{{getTooltipImageName(2, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(2, 1)" />
+                    </div>
+                </div>
+                
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(2, 2)}}" ngbTooltip="{{getTooltipImageName(2, 2)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(2, 2)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(2, 3)}}" ngbTooltip="{{getTooltipImageName(2, 3)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(2, 3)" />
+                    </div>                   
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    &nbsp;
+
+    <div id="cardTwo" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3">
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" style="background-color:white; height:350px; width:32%; margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="d-flex justify-content-center eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 4)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 4)}}</label>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(3, 0)}}" ngbTooltip="{{getTooltipImageName(3, 0)}}" ngbTooltip="{{getTooltipImageName(3, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(3, 0)"/>
+                    </div>
+                </div>
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(3, 1)}}" ngbTooltip="{{getTooltipImageName(3, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(3, 1)"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" height="100%" width="100%" style="background-color:white; width:32%; margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 5)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 5)}}</label>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(4, 0)}}" ngbTooltip="{{getTooltipImageName(4, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(4, 0)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(4, 1)}}" ngbTooltip="{{getTooltipImageName(4, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(4, 1)" />
+                    </div>
+                </div>
+                
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(4, 2)}}" ngbTooltip="{{getTooltipImageName(4, 2)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(4, 2)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(4, 3)}}" ngbTooltip="{{getTooltipImageName(4, 3)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(4, 3)" />
+                    </div>                   
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" style="background-color:white; width:33%;  margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="d-flex justify-content-center eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 6)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 6)}}</label>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(5, 0)}}" ngbTooltip="{{getTooltipImageName(5, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(5, 0)"/>
+                    </div>
+                </div>
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(5, 1)}}" ngbTooltip="{{getTooltipImageName(5, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(5, 1)"/>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div id="cardThree" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3" style="margin-top: 5px;">
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" style="background-color:white; height:365px; width:32%; margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 7)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 7)}}</label>
+                </div>
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(6, 0)}}" ngbTooltip="{{getTooltipImageName(6, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(6, 0)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(6, 1)}}" ngbTooltip="{{getTooltipImageName(6, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(6, 1)" />
+                    </div>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(6, 2)}}" ngbTooltip="{{getTooltipImageName(6, 2)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(6, 2)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(6, 3)}}" ngbTooltip="{{getTooltipImageName(6, 3)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(6, 3)" />
+                    </div>                   
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" height="100%" width="100%" style="background-color:white; width:32%; margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="d-flex justify-content-center eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 8)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 8)}}</label>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(7, 0)}}" ngbTooltip="{{getTooltipImageName(7, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(7, 0)"/>
+                    </div>
+                </div>
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(7, 1)}}" ngbTooltip="{{getTooltipImageName(7, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(7, 1)"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6 pl-3" style="background-color:white; width:33%;  margin-left: 10px;">
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-heading" style="text-align: right;"><b>{{getProductName(1, 9)}}</b></label>
+                </div>
+                <div class="modal-header d-flex justify-content-center">
+                    <label class="eCommerce-home-small-heading" style="text-align: right;">{{getCategoryDetails(1, 9)}}</label>
+                </div>
+
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(8, 0)}}" ngbTooltip="{{getTooltipImageName(8, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(8, 0)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(8, 1)}}" ngbTooltip="{{getTooltipImageName(8, 1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(8, 1)" />
+                    </div>
+                </div>
+                
+                <div class="row" style="background-color:white; height:160px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(8, 2)}}" ngbTooltip="{{getTooltipImageName(8, 2)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(8, 2)"/>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-2" style="padding: 10px;">
+                        <img src="{{getImageName(8, 3)}}" ngbTooltip="{{getTooltipImageName(8, 3)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(8, 3)" />
+                    </div>                   
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <!-- Choose by Category -->
+
+    <!-- Top Selling -->
+    &nbsp;
+    <div id="best" class="eCommerce-sidebar-home-expand">
+        <label class="eCommerce-home-best-selling"><b>Top Selling Products</b></label>
+    </div>
+
+    <div id="cardFour" class="eCommerce-sidebar-home-expand">      
+        <div class="row pb-3" style="background-color:white; height:185px;">
+            <label class="eCommerce-home-small-heading" style="text-align: left;">{{getTopSellingDetail()}}</label> 
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:150px; width:16%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getLongImageName(0, 0)}}" ngbTooltip="{{getLongTooltipImageName(0, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(-1, -1)"/>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:150px; width:15%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getLongImageName(1, 0)}}" ngbTooltip="{{getLongTooltipImageName(1, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(-1, -1)"/>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:150px; width:16%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getLongImageName(2, 0)}}" ngbTooltip="{{getLongTooltipImageName(2, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(-1, -1)"/>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:150px; width:15%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getLongImageName(3, 0)}}" ngbTooltip="{{getLongTooltipImageName(3, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(-1, -1)"/>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:150px; width:16%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getLongImageName(4, 0)}}" ngbTooltip="{{getLongTooltipImageName(4, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(-1, -1)"/>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:150px; width:16%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getLongImageName(5, 0)}}" ngbTooltip="{{getLongTooltipImageName(5, 0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;" (click)="onImageClick(-1, -1)"/>
+            </div>
+            
+        </div>
+    </div>
+    <!-- Top Selling -->
+
+    &nbsp;&nbsp;
+
+    <!-- Deal of the week -->
+    <div id="deal" class="eCommerce-sidebar-home-expand">
+        <label class="eCommerce-home-best-selling"><b>Deal of the Week</b></label>
+    </div>
+
+    <div id="dealdescription" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3" style="height:600px;">
+            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 pl-5" style="background-color:white; height:480px; width:40%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getDealImageName()}}" ngbTooltip="{{getDealTooltipImageName()}}" class="card-img-top rounded" style="background-color:white; object-fit: cover; max-width: 100%; height:480px; max-height: 100%;"/>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 pl-7">
+                <div>
+                    <label class="eCommerce-home-best-selling" style="margin-left: 100px; text-align: left;"><b>{{getDealTooltipImageName()}}</b></label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;">Was </label>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1px; text-align: left;" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                    </svg>
+                    <label class="eCommerce-home-heading" style="margin-left: 1px; text-align: left;"><s>{{getOldPrice()}}</s></label>
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                    </svg>                                      
+                    <label class="eCommerce-home-heading" style="margin-left: 1px; text-align: left;"><b>{{getNewPrice()}}</b></label> 
+                </div>
+
+                <div>
+                    <a class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-half"></i></b></a>
+                </div>                
+
+                &nbsp;&nbsp;
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;"><b>Description</b></label> 
+                </div>
+
+                <label class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;">{{getDealDescription()}}</label> 
+
+                <div></div>
+                &nbsp;&nbsp;
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;">Select size</label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-best-selling" style="margin-left: 85px; text-align: left;">.</label> 
+                    <button *ngFor="let size of sizes let i = index" [attr.class]="'btn ' + sizeStyle[i]" style="margin-left: 5px;" (click)="onSizeClick(i)"><b>{{size.sizeCode}}</b></button>        
+                </div>
+                &nbsp;&nbsp;
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;">Select color</label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-best-selling" style="margin-left: 85px; text-align: left;">.</label> 
+                    <button class="btn" *ngFor="let color of colors let i = index" [attr.style]="'margin-left: 5px; background:rgb(' + colorStyle[i].red + ',' +  colorStyle[i].green + ',' + colorStyle[i].blue + '); color:rgb(251, 251, 251);'" [attr.class]="colorBorderStyle[i]" (click)="onColorClick(i)"><b>{{color.description}}</b></button>        
+                </div>
+                &nbsp;&nbsp;
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;">Color</label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-best-selling" style="margin-left: 85px; text-align: left;">.</label> 
+                    <a class="btn eCommerce-home-best-selling"><b><i class="bi bi-patch-check"></i></b></a>
+                    <button class="btn" [attr.style]="'margin-left: 5px; background:rgb(' + colorStyle[selectedColor].red + ',' +  colorStyle[selectedColor].green + ',' + colorStyle[selectedColor].blue + '); color:rgb(251, 251, 251); border: 4px solid rgb(128, 128, 128); border-radius:15px;'"><b>{{colors[selectedColor].description}}</b></button>        
+                    <a class="btn eCommerce-home-best-selling"><b><i class="bi bi-patch-check"></i></b></a>
+                </div>
+
+                &nbsp;&nbsp;
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 100px; text-align: left;">Count</label> 
+                </div>                  
+                <div>
+                    <a class="btn eCommerce-home-count" style="margin-left: 85px; text-align: left; color: rgb(51, 155, 124); border: 1px solid rgb(51, 155, 124);" (click)="onDealDecrement()"><b><i class="bi bi-dash-circle-fill"></i></b></a>
+                    &nbsp;
+                    <label class="eCommerce-home-count" style="margin-left: 2px; margin-right: 2px; margin-top: 10px;"><b>{{dealCount}}</b></label>
+                    &nbsp;
+                    <a class="btn eCommerce-home-count" style="margin-left: 2px; text-align: left; color: rgb(51, 155, 124); border: 1px solid rgb(51, 155, 124);" (click)="onDealIncrement()"><b><i class="bi bi-plus-circle-fill"></i></b></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn eCommerce-nav-button" style="margin-left: 5px;"><b>Add to Shopping Cart</b></button>
+                    &nbsp;&nbsp;
+                    <button class="btn eCommerce-nav-button" style="margin-left: 5px;"><b>View Details</b></button>        
+                </div>    
+            </div> 
+        </div>
+    </div>
+    <!-- Deal of the week -->
+
+    &nbsp;&nbsp;
+    <!-- Happy Plants -->
+    <div id="happy" class="eCommerce-sidebar-home-expand d-flex justify-content-center">
+        <label class="eCommerce-home-best-selling"><b>Happy Plants Happy People</b></label>
+    </div>
+
+    <div id="happyplants" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3" style="height:550px;">
+            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 pl-7">
+                <label class="eCommerce-home-heading" style="margin-top: 10px; margin-left: 5px; text-align: left;">{{getComment1()}}</label> 
+                <label class="eCommerce-home-heading d-flex justify-content-center" style="margin-top: 5px; margin-left: 5px; text-align: center;">---- {{getName1()}} ----</label> 
+            
+                <label class="eCommerce-home-heading" style="margin-top: 60px; margin-left: 5px; text-align: left;">{{getComment2()}}</label> 
+                <label class="eCommerce-home-heading d-flex justify-content-center" style="margin-top: 5px; margin-left: 5px; text-align: center;">---- {{getName2()}} ----</label> 
+                
+                <label class="eCommerce-home-heading" style="margin-top: 60px; margin-left: 5px; text-align: left;">{{getComment3()}}</label> 
+                <label class="eCommerce-home-heading d-flex justify-content-center" style="margin-top: 5px; margin-left: 5px; text-align: center;">---- {{getName3()}} ----</label> 
+            </div>
+            
+            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 pl-5" style="background-color:white; height:480px; width:40%; margin-top: 10px; margin-left: 10px;">
+                <img src="{{getHappyImageName()}}" class="card-img-top rounded" style="background-color:white; object-fit: cover; max-width: 100%; height:480px; max-height: 100%;"/>
+            </div>            
+        </div>
+    </div>
+    <!-- Happy Plants -->
+
+    <!-- Round Images -->
+    <div id="shopnow" class="eCommerce-sidebar-home-expand">
+        <label class="eCommerce-home-best-selling"><b>Shop Now</b></label>
+    </div>    
+    <div id="roundimages" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3" style="height:300px;">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-3" style="height:300px; width:24%; margin-top: 10px; margin-left: 10px;">
+                <img src="assets/images/gardening1.png" class="card-img-top rounded" style="background-color:white; border-radius:50%; max-width: 100%; height:300px; max-height: 100%;"/>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-3" style="height:300px; width:24%; margin-top: 10px; margin-left: 10px;">
+                <img src="assets/images/gardening2.png" class="card-img-top rounded" style="background-color:white; border-radius:50%; max-width: 100%; height:300px; max-height: 100%;"/>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-3" style="height:300px; width:24%; margin-top: 10px; margin-left: 10px;">
+                <img src="assets/images/gardening3.png" class="card-img-top rounded" style="background-color:white; border-radius:50%; max-width: 100%; height:300px; max-height: 100%;"/>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-3" style="height:300px; width:24%; margin-top: 10px; margin-left: 10px;">
+                <img src="assets/images/gardening4.png" class="card-img-top rounded" style="background-color:white; border-radius:50%; max-width: 100%; height:300px; max-height: 100%;"/>
+            </div>                                    
+        </div>
+    </div>
+    <!-- Round Images -->
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <!--Home Video-->
+    
+    <div id="homevideo" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3">
+            <div class="col-4" style="width: 100%;">                
+                <video controls (click)="toggleHomeVideo()" #videoPlayer style="width: 100%;">
+                    <source src="assets/eCommerce-Images/Home/Video/bagwani.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!--Home Video-->
+
+    <!-- About Bagwani -->
+    <div id="about" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-about></ecommerce-product-about>
+    </div>
+    <!-- About Bagwani -->
+
+    &nbsp;
+    
+    <!-- Navigation Pane -->
+    <div id="navbar" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-navigation></ecommerce-product-navigation>
+    </div>
+    <!-- Navigation Pane -->
+    &nbsp;&nbsp;&nbsp;&nbsp;
+<div>

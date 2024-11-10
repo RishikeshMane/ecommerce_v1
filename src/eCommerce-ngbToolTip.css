@@ -1,0 +1,26 @@
+/** Customized Style sheet for ngbToolTip */
+
+/**
+.eCommerce-ngbToolTip .tooltip-inner {
+    background-color: rgb(51, 155, 124);
+    color: white;
+}
+*/
+
+.tooltip-inner { 
+    background-color:#411900;
+    opacity: 0.95 !important;
+}
+
+.tooltip.bs-tooltip-right .tooltip-arrow::before {
+    border-right-color: #411900 !important;
+}
+.tooltip.bs-tooltip-left .tooltip-arrow::before {
+    border-left-color: #411900 !important;
+}
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: #411900 !important;
+}
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #411900 !important;   
+}

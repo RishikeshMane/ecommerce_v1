@@ -1,0 +1,392 @@
+<div class="container-fluid">
+
+    <!-- Product Image -->
+    <div id="productshome" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-12">
+                <img src="{{shoppingCartImageUrl}}" class="card-img-top" style="max-width: 100%; max-height: 100%;"/>
+            </div>
+        </div>
+    </div>
+    <!-- Product Image -->
+    <br>  
+
+    <!-- Title -->
+    <div id="productstitle" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-2"></div> 
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 pl-8">    
+                <label class="eCommerce-home-best-selling d-flex justify-content-center" style="text-align: center;"><b><i class="bi bi-cart-check-fill"></i></b><b><i class="bi bi-cart-check"></i></b>&nbsp;&nbsp;<b>Shopping Cart</b>&nbsp;&nbsp;<b><i class="bi bi-cart-check"></i></b><b><i class="bi bi-cart-check-fill"></i></b></label>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>    
+    <!-- Title -->    
+    <hr style="width: 100%; text-align: center;">
+    <!-- Product -->
+    <div id="productscartrow" class="eCommerce-sidebar-home-expand">
+        <div *ngFor="let product of shoppingCart.productDetail; index as i">
+            <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:145px; width:10%; margin-top: 10px; margin-left: 10px;">    
+                    <img src="{{getShoppingCartImage(product)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 145px; max-width: 100%; max-height: 100%;"/>
+                    &nbsp;
+                    <label class="eCommerce-home-vsmall-heading">{{product.sizeCode}}</label>
+                    <label class="eCommerce-home-vsmall-heading">(</label>
+                    <label class="eCommerce-home-vsmall-heading">{{product.colorName}}</label>
+                    <label class="eCommerce-home-vsmall-heading">)</label>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                    <div class="row">
+                        <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b>{{product.title}}</b></label>
+                        &nbsp;                       
+                        <label class="eCommerce-home-small-heading"><b>{{product.description}}</b></label>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4" style="margin-top: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                    </svg>                
+                    <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b>{{product.price}} </b></label>
+                    <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b>&nbsp;X&nbsp;</b></label>
+                    <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b> {{product.count}}</b></label>
+                    <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b>&nbsp; = </b></label>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                    </svg>                
+                    <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b> {{product.price * product.count}}</b></label>
+
+                    <a class="btn eCommerce-home-count" style="margin-left: 50px; text-align: left; color: rgb(51, 155, 124); border: 1px solid rgb(51, 155, 124);" (click)="onDecrementCount(i)"><b><i class="bi bi-dash-circle-fill"></i></b></a>
+                    &nbsp;
+                    <label class="eCommerce-home-count" style="margin-left: 2px; margin-right: 2px; margin-top: 10px;"><b>{{product.count}}</b></label> 
+                    &nbsp;
+                    <a class="btn eCommerce-home-count" style="margin-left: 2px; text-align: left; color: rgb(51, 155, 124); border: 1px solid rgb(51, 155, 124);" (click)="onIncrementCount(i)"><b><i class="bi bi-plus-circle-fill"></i></b></a>
+                </div>
+            </div>
+            &nbsp;
+            <div class="row">
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 pl-1">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                    <button class="btn btn-sm eCommerce-nav-button" style="margin-left: 5px;" (click)="onDeleteProduct(i)"><b>Delete from ShoppingCart</b></button>
+                </div>                
+            </div>
+            <div class="row">
+                &nbsp;
+                <hr style="width: 100%; text-align: center;">
+            </div>
+        </div>
+
+        <div>
+            <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 pl-5">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                    <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b>Summary Total = </b></label>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                    </svg>
+                    <label class="eCommerce-anchor-background-header eCommerce-control-top-padding-header"><b>{{summaryTotal}}</b></label>                  
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 pl-5">
+                    <label class="eCommerce-checkdelivery-text" sytle="font-size: 2px;">Handling charges of ₹ {{handlingCharges}} will be added during shipment</label>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 pl-5">
+                    <label class="eCommerce-checkdelivery-text" sytle="font-size: 2px;">Online Transaction fees of {{precentageFees}} % will be added during shipment</label>
+                </div>                
+            </div>            
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;                     
+            <div class="row">
+                <div class="col-xl-4 col-lg-5 col-md-5 col-sm-5 pl-5">
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-6">              
+                    <button class="btn eCommerce-nav-button" style="margin-left: 5px;" (click)="onProceedPayment()"><b>Proceed for Payment</b></button>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-6">              
+                    <button class="btn eCommerce-nav-button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#codModal"><b>Cash on Delivery</b></button>
+                </div>                
+                <div class="col-xl-4 col-lg-2 col-md-2 col-sm-2 pl-2">
+                </div>                 
+            </div>            
+            <div class="row">
+                &nbsp;
+                <hr style="width: 100%; text-align: center;">
+            </div>            
+        </div>
+    </div>
+    <!-- Product -->
+
+    <!-- Shipping Address -->
+    <div id="productscartshippingaddress" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-2"></div> 
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 pl-8">    
+                <label class="eCommerce-home-heading d-flex justify-content-left" style="text-align: center;"><b><u>Shipping Address(es)</u></b></label>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        &nbsp;       
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <input class="form-check-input" [checked]="shoppingAddressIndex === 0" type="radio" style="border: 0.15em solid currentColor;" (click)="onShippingAddress(0)" name="userRole" value="ShippingAddress" />
+                <label class="form-check-label" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 1</label>
+                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 0" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>          
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <input class="form-check-input" [checked]="shoppingAddressIndex === 1" [class.d-none]="shippingAddress2.length === 0" style="border: 0.15em solid currentColor;" type="radio" (click)="onShippingAddress(1)" name="userRole" value="ShippingAddress" />
+                <label class="form-check-label" [class.d-none]="shippingAddress2.length === 0" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 2</label>
+                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 1" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>
+                <button class="btn btn-sm eCommerce-nav-button" [class.d-none]="shippingAddress2.length === 0" data-bs-toggle="modal" data-bs-target="#addressModal" style="margin-left: 5px;" (click)="onChangeAddresss(1)"><b>Change Address</b></button>
+            </div>            
+        </div>
+        &nbsp;
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <textarea id = "shippingAddress1" readonly style="width:100%; height:100px;">{{shippingAddress1}}</textarea>  
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <textarea id = "shippingAddress2" readonly [class.d-none]="shippingAddress2.length === 0" style="width:100%; height:100px;">{{shippingAddress2}}</textarea>   
+            </div>            
+        </div>
+        &nbsp;
+        
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <input class="form-check-input" [checked]="shoppingAddressIndex === 2" type="radio" [class.d-none]="shippingAddress3.length === 0" style="border: 0.15em solid currentColor;" (click)="onShippingAddress(2)" name="userRole" value="ShippingAddress" />
+                <label class="form-check-label" [class.d-none]="shippingAddress3.length === 0" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 3</label>
+                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 2" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>                
+                <button class="btn btn-sm eCommerce-nav-button" [class.d-none]="shippingAddress3.length === 0" data-bs-toggle="modal" data-bs-target="#addressModal" style="margin-left: 5px;" (click)="onChangeAddresss(2)"><b>Change Address</b></button>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <input class="form-check-input" [checked]="shoppingAddressIndex === 3" type="radio" [class.d-none]="shippingAddress4.length === 0" style="border: 0.15em solid currentColor;" (click)="onShippingAddress(3)" name="userRole" value="ShippingAddress" />
+                <label class="form-check-label" [class.d-none]="shippingAddress4.length === 0" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 4</label>
+                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 3" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>                                
+                <button class="btn btn-sm eCommerce-nav-button" [class.d-none]="shippingAddress4.length === 0" data-bs-toggle="modal" data-bs-target="#addressModal" style="margin-left: 5px;" (click)="onChangeAddresss(3)"><b>Change Address</b></button>
+            </div>            
+        </div>
+        &nbsp;
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <textarea id = "shippingAddress3" readonly [class.d-none]="shippingAddress3.length === 0" style="width:100%; height:100px;">{{shippingAddress3}}</textarea>  
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 pl-4">
+                <textarea id = "shippingAddress4" readonly [class.d-none]="shippingAddress4.length === 0" style="width:100%; height:100px;">{{shippingAddress4}}</textarea>   
+            </div>            
+        </div>
+        &nbsp;
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-3">
+                <button class="btn eCommerce-nav-button" [disabled]="moreAddressCount === 3" data-bs-toggle="modal" data-bs-target="#addressModal" style="margin-left: 5px;" (click)="onAddMoreAddresss()"><b>Add More Shipping Address</b></button>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-3">
+                <button class="btn eCommerce-small-button-red" [disabled]="moreAddressCount === 0" data-bs-toggle="modal" data-bs-target="#deleteModal"><b>Delete Last Shipping Address</b></button>
+            </div>            
+        </div>          
+    </div>
+    <!-- Shipping Address -->
+    
+    <!-- Edit Shipping Address -->
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content eCommerce-background">
+            
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5" id="loginModalLabel">Shipping Address</h3>
+                </div>
+            
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        <div class="row" style="margin-top: 5px; margin-bottom: 0px;">
+                            <div class="col-3"></div>
+                            <div class="col-1"></div>
+                            <!-- Flag-->
+                            <div class="col-1">
+                                <span class="fi fi-{{flagCode}}"></span>
+                            </div>
+                            <div class="col-1">
+                                <!--<span class="fi fi-{{flagCode}}"></span>-->
+                            </div>
+                            <div class="col-1">
+                                <span class="fi fi-{{flagCode}}"></span>
+                            </div>                                        
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Country</label>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="margin-top: 7px;">
+                                <select style="width: 100%;" (change)="onSelectCountry(selectCountry.value)" [class.is-invalid]="true" #selectCountry="ngModel" class="custom-select eCommerce-control-padding" name="country" [(ngModel)]="selectedCountry">
+                                    <option *ngFor="let country of countries" [selected]="country === selectedCountry">{{country}}</option>
+                                </select>                            
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">State</label>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="margin-top: 7px;">
+                                <select style="width: 100%;" (change)="onSelectState(selectState.value)" [class.is-invalid]="true" #selectState="ngModel" class="custom-select eCommerce-control-padding" name="state" [(ngModel)]="selectedState">
+                                    <option *ngFor="let state of states" [selected]="state === selectedState">{{state}}</option>
+                                </select>                            
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">City</label>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="margin-top: 7px;">
+                                <select style="width: 100%;" (change)="onSelectCity(selectCity.value)" [class.is-invalid]="true" #selectCity="ngModel" class="custom-select eCommerce-control-padding" name="city" [(ngModel)]="selectedCity">
+                                    <option *ngFor="let city of cities" [selected]="city === selectedCity">{{city}}</option>
+                                </select>                            
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Pincode</label>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="margin-top: 7px;">
+                                <input type="text" #pincodeLabel="ngModel" [class.is-invalid]="pincodeLabel.touched && !isValidPincode(pincode)" class="form-control" placeholder="654321" name="pincode" [(ngModel)]="pincode"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-8">
+                                <small class="text-danger" [class.d-none]="pincodeLabel.untouched || isValidPincode(pincode)">Pincode is invalid</small>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Address</label>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="margin-top: 7px;">
+                                <textarea style="width:100%;" #addressLabel="ngModel" class="form-control" placeholder="Please enter address..." name="address" [(ngModel)]="address"></textarea>                
+                            </div>                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: 13px;"> 
+                                <button class="btn eCommerce-nav-button d-flex justify-content-center" (click)="onUpdateAddress()" [attr.data-bs-dismiss]="'modal'" style="width:100%;" [disabled]="!isValidPincode(pincode)">Ok</button>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 13px;">
+                                <button class="btn eCommerce-nav-button-reverse d-flex justify-content-center" [attr.data-bs-dismiss]="'modal'" style="width:100%;">Cancel</button>
+                            </div>                            
+                        </div>                        
+
+                        &nbsp;
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>          
+    <!-- Edit Shipping Address -->
+
+    <!-- Delete Shipping Address -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content eCommerce-background">
+            
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5">Delete Address</h3>
+                </div>
+            
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        
+                        <div class="row">
+                            <div class="col-md-12" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Delete Last Shipping Address?</label>
+                            </div>
+                        </div>
+                        &nbsp;
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: 13px;"> 
+                                <button class="btn eCommerce-nav-button d-flex justify-content-center" (click)="onDeleteAddresss()" [attr.data-bs-dismiss]="'modal'" style="width:100%;">Yes</button>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 13px;">
+                                <button class="btn eCommerce-nav-button-reverse d-flex justify-content-center" [attr.data-bs-dismiss]="'modal'" style="width:100%;">No</button>
+                            </div>                            
+                        </div>                        
+
+                        &nbsp;
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>          
+    <!-- Delete Shipping Address -->
+
+    <!-- Cash on Delivery -->
+    <div class="modal fade" id="codModal" tabindex="-1" aria-labelledby="codModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content eCommerce-background">
+            
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5">Cash on Delivery</h3>
+                </div>
+            
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        
+                        <div class="row">
+                            <div class="col-md-12" style="margin-top: 13px;"> 
+                                <label class="eCommerce-anchor-background eCommerce-control-top-padding">Are you sure for CashOnDelivery?</label>
+                            </div>
+                        </div>
+                        &nbsp;
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: 13px;"> 
+                                <button class="btn eCommerce-nav-button d-flex justify-content-center" [attr.data-bs-dismiss]="'modal'" style="width:100%;" (click)="onCashOnDelivery()">Ok</button>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 13px;">
+                                <button class="btn .eCommerce-nav-button-reverse d-flex justify-content-center" [attr.data-bs-dismiss]="'modal'" style="width:100%;">Cancel</button>
+                            </div>                            
+                        </div>                        
+
+                        &nbsp;
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>          
+    <!-- Cash on Delivery -->
+
+    <hr style="width: 100%; text-align: center;">
+
+    <br>
+    <!-- About Bagwani -->
+    <div id="about" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-about></ecommerce-product-about>
+    </div>
+    <!-- About Bagwani -->
+
+    &nbsp;
+    
+    <!-- Navigation Pane -->
+    <div id="navbar" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-navigation></ecommerce-product-navigation>
+    </div>
+    <!-- Navigation Pane -->    
+    <br>
+
+</div>

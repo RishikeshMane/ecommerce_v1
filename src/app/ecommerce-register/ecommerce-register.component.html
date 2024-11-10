@@ -1,0 +1,689 @@
+<div class="container eCommerce-background eCommerce-sidebar-margin-expand">
+    <div class="container-fluid">
+        <!--Registration-->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid eCommerce-register-navigation d-flex justify-content-center">
+                <!--<label class="eCommerce-register-navigation-label"><b>Register with us and enjoy the unique experience of {{title}}. Please call us in case of enquires.</b></label>-->
+                <marquee class="eCommerce-register-navigation-label" direction="left" scrollamount="3"><b>Register with us and enjoy the unique experience of {{title}}. Please call us in case of enquires.</b></marquee>
+            </div>
+        </nav>
+
+        <!--Registration attempt failed-->
+        <nav class="navbar navbar-expand-lg" [class.d-none]="registrationError">
+            <div class="container-fluid eCommerce-login-failed d-flex justify-content-center">
+                <label class="eCommerce-login-failed-label"><b>Registration attempt failed. Please try again.!!</b></label>
+            </div>
+        </nav>
+
+        <!--Registration already present-->
+        <nav class="navbar navbar-expand-lg" [class.d-none]="registrationMobilePresent">
+            <div class="container-fluid eCommerce-login-failed d-flex justify-content-center">
+                <label class="eCommerce-login-failed-label"><b>Registration already done with existing mobile no. Please try with another number.!!</b></label>
+            </div>
+        </nav>        
+
+        <!--Registration done successfully-->
+        <nav class="navbar navbar-expand-lg" [class.d-none]="registrationAttemptSuccessful">
+            <div class="container-fluid eCommerce-register-navigation d-flex justify-content-center">
+                <label class="eCommerce-register-navigation-label-success"><b>Registration done successfully. Please login and continue.!!</b></label>
+            </div>
+        </nav>        
+
+        <form #userForm="ngForm">
+            <!--
+            {{userForm.form.valid}}
+            <hr/>
+            {{userForm.value | json}}
+            <hr/>
+            {{user | json}}
+            <hr/>
+            -->
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <!-- First Name-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">First Name*</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" required #firstNameLabel="ngModel" [class.is-invalid]="firstNameLabel.invalid && firstNameLabel.touched" placeholder="First Name" class="form-control eCommerce-edit-border" name="firstName" [(ngModel)]="user.firstName"/>
+                    </div>
+                    <!-- Last Name-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Last Name</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" #lastNameLabel="ngModel" class="form-control eCommerce-edit-border" placeholder="Last Name" name="lastName" [(ngModel)]="user.lastName"/>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="firstNameLabel.valid || firstNameLabel.untouched">Name is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-2"></div>
+                    <!-- Mobile-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Mobile*</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" required #mobileLabel="ngModel" [class.is-invalid]="mobileLabel.touched && !isValidPhoneNumber(user.phone)" class="form-control eCommerce-edit-border" placeholder="9898989898" name="mobile" [(ngModel)]="user.phone"/>
+                    </div>
+                    <!--Email-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Email</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" #emailLabel="ngModel" class="form-control eCommerce-edit-border" name="email" placeholder="name@domain.com" [(ngModel)]="user.email"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="mobileLabel.untouched || isValidPhoneNumber(user.phone)">Mobile no is invalid</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-2"></div>
+                    <!-- Password-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Password*</label>
+                    </div>
+                    <div class="col-5">
+                        <input type="password" required #passwordLabel="ngModel" [class.is-invalid]="passwordLabel.touched && !isValidPassword(user.password)" placeholder="Abcd#123" class="form-control eCommerce-edit-border" name="password" [(ngModel)]="user.password"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-5">
+                        <small class="text-danger" [class.d-none]="passwordLabel.untouched || isValidPassword(user.password)">Password doesnot match criteria</small>
+                        <small class="text-dark" > (Password must be minimum 8 characters and must contain alphabetic, numeric, one capital character and atleast one non alphanumeric characters)</small>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background">Supplier/Buyer</label>
+                    </div>
+                    <!-- Supplier / Buyer-->
+                    <div class="col-2" >
+                        <div class="form-check">
+                            <input class="form-check-input" style="border: 0.05em solid currentColor;" [(ngModel)]="user.userRole" (click)="onBuyerCheck()" type="radio" name="userRole" value="Buyer" />
+                            <label class="form-check-label">I am a Buyer</label>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" style="border: 0.05em solid currentColor;" [(ngModel)]="user.userRole" (click)="onSupplierCheck()" type="radio" name="userRole" value="Supplier" />
+                            <label class="form-check-label">I am a Supplier</label>
+                        </div>
+                    </div> 
+                    
+                </div>
+            </div>
+
+            <div class="form-group" *ngIf="user.userRole === 'Supplier'">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <!-- Store name-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Storename*</label>
+                    </div>
+                    <div class="col-5">
+                        <input style="width:100%;" required #storeLabel="ngModel" class="form-control eCommerce-edit-border" name="store" [(ngModel)]="user.store"/>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!--Delivery code-->
+                <div class="row" style="margin-top: 10px;" [class.d-none]="user.userRole !== 'Supplier'">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                    <button class="btn eCommerce-nav-button-change d-flex justify-content-center btn-sm" style="width:100%;" (click)="onClickDeliveryCode()">
+                        <i class="bi bi-plus-circle"></i>&nbsp; Add Delivery pincodes&nbsp;</button>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 5px;" [class.d-none]="user.userRole !== 'Supplier'">
+                    <div class="col-3"></div>
+                    <div class="col-5">
+                        <small class="text-dark">(Keep Adding ">>" Postal pincodes e.g '411001' where your products can be delivered)</small>
+                    </div> 
+                </div>                
+
+                <div class="row" style="margin-top: 10px;" [class.d-none]="!showDeliveryCode">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <input type="text" required #deliverypincodeLabel="ngModel" placeholder="Delivery pincode" class="form-control eCommerce-edit-border" name="deliverypincode" [(ngModel)]="deliveryPincode"/>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn eCommerce-nav-button-change d-flex justify-content-center btn-sm" style="margin-bottom: 3px; margin-left: 15px; width: fit-content;" (click)="onAddDeliveryCode()">>></button>
+                        <button class="btn eCommerce-nav-button-change d-flex justify-content-center btn-sm" style="margin-top: 3px; margin-left: 15px; width: fit-content;" (click)="onSubtractDeliveryCode()"><<</button>                                      
+                    </div>
+                    <div class="col-6">
+                        <select (change)="onSelectDeliveryCode(selectDeliveryCode.value)" #selectDeliveryCode="ngModel" class="eCommerce-listbox eCommerce-edit-border" style="width: 30%;" size="4" name="deliveryCode" [(ngModel)]="selDeliveryCode">  
+                            <option *ngFor="let deliveryPincode of user.deliveryPinCodes">{{deliveryPincode}}</option> 
+                        </select>
+                    </div>             
+                </div>
+            </div>         
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 5px; margin-bottom: 0px;">
+                    <div class="col-3"></div>
+                    <div class="col-1"></div>
+                    <!-- Flag-->
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode}}"></span>
+                    </div>                                        
+                </div>
+            </div>            
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 0px;">
+                    <div class="col-2"></div>
+                    <!-- Country-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <div class="row">
+                            <label class="eCommerce-anchor-background eCommerce-control-top-padding">Country*</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <select (change)="onSelectCountry(selectCountry.value)" style="width: 100%;" required [class.is-invalid]="true" #selectCountry="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="country" [(ngModel)]="user.country">
+                            <!--<option *ngFor="let country of countries" style="background-image: url('./../../assets/images/search.png');"><img src="./../../assets/images/in.svg">{{country}}</option>-->
+                            <option *ngFor="let country of countries" style="background-image: url('./../../assets/images/search.png');">{{country}}</option>
+                        </select>
+                    </div>                   
+                    <!--State-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">State*</label>
+                    </div>
+                    <div class="col-2">
+                        <select (change)="onSelectState(selectState.value)" style="width:100%;" required [class.is-invalid]="true" #selectState="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="state" [(ngModel)]="user.state">
+                            <option *ngFor="let state of states">{{state}}</option>
+                        </select>
+                    </div>                  
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="isValidCountry()">Please select country</small>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="isValidState()">Please select state</small>
+                    </div>                      
+                </div>                
+            </div>
+            
+            <div class="form-group">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <!-- City-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">City*</label>
+                    </div>
+                    <div class="col-2">
+                        <select (change)="onSelectCity(selectCity.value)" style="width:100%;" required [class.is-invalid]="true" #selectCity="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="city" [(ngModel)]="user.city">
+                            <option *ngFor="let city of cities">{{city}}</option>
+                        </select>
+                    </div>
+                    <!--Pincode-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Pincode*</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" required #pincodeLabel="ngModel" [class.is-invalid]="pincodeLabel.touched && !isValidPincode(pincodeText)" class="form-control eCommerce-edit-border" placeholder="654321" name="pincode" [(ngModel)]="pincodeText"/>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="isValidCity()">Please select city</small>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="pincodeLabel.untouched || isValidPincode(pincodeText)">Pincode is invalid</small>
+                    </div>  
+                </div>
+            </div>          
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <!-- Address 1-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">{{address1}}</label>
+                    </div>
+                    <div class="col-5">
+                        <textarea style="width:100%;" required #address1Label="ngModel" class="form-control eCommerce-edit-border" placeholder="Please enter address..." name="address1" [(ngModel)]="user.address1"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="address1Label.valid || address1Label.untouched">Address is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <!--Address[1]-->
+            <div class="form-group" [class.d-none]="moreAddressCount === 0">
+                <div class="row" style="margin-top: 5px; margin-bottom: 0px;">
+                    <div class="col-3"></div>
+                    <div class="col-1"></div>
+                    <!-- Flag-->
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode1}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode1}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode1}}"></span>
+                    </div>                                        
+                </div>
+            </div>            
+
+            <div class="form-group" [class.d-none]="moreAddressCount === 0">
+                <div class="row" style="margin-top: 0px;">
+                    <div class="col-2"></div>
+                    <!-- Country-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <div class="row">
+                            <label class="eCommerce-anchor-background eCommerce-control-top-padding">Country*</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-2">
+                        <select (change)="onSelectAddressCountry(0, selectCountry1.value)" style="width: 100%;" required [class.is-invalid]="true" #selectCountry1="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="country1" [(ngModel)]="user.address.addresses[0].country">
+                            <option *ngFor="let country of moreAddress[0].countries">{{country}}</option>
+                        </select>
+                    </div>
+                                    
+                    <!--State-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">State*</label>
+                    </div>
+                    
+                    <div class="col-2">
+                        <select (change)="onSelectAddressState(0, selectState1.value)" style="width:100%;" required [class.is-invalid]="true" #selectState1="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="state1" [(ngModel)]="user.address.addresses[0].state">
+                            <option *ngFor="let state of moreAddress[0].states">{{state}}</option>
+                        </select>
+                    </div>
+                                    
+                </div>            
+            </div>
+            
+            <div class="form-group" [class.d-none]="moreAddressCount === 0">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <!--City-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">City*</label>
+                    </div>
+                    <div class="col-2">
+                        <select (change)="onSelectAddressCity(0, selectCity1.value)" style="width:100%;" required [class.is-invalid]="true" #selectCity1="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="city1" [(ngModel)]="user.address.addresses[0].city">
+                            <option *ngFor="let city of moreAddress[0].cities">{{city}}</option>
+                        </select>
+                    </div>
+                    <!--Pincode-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Pincode*</label>
+                    </div>
+                    <div class="col-2">
+                        <!--<input type="text" required #pincodeLabel1="ngModel" [class.is-invalid]="pincodeLabel1.touched && !isValidPincode(moreAddress[0].pincodeText)" class="form-control" placeholder="654321" name="pincode1" [(ngModel)]="moreAddress[0].pincodeText"/>-->
+                        <input type="text" #pincodeLabel1="ngModel" [class.is-invalid]="pincodeLabel1.touched && !isValidPincode(user.address.addresses[0].pincode)" class="form-control eCommerce-edit-border" placeholder="654321" name="pincode1" [(ngModel)]="user.address.addresses[0].pincode"/>
+                    </div>                    
+                </div>
+
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="pincodeLabel1.untouched || isValidPincode(user.address.addresses[0].pincode)">Pincode is invalid</small>
+                    </div>  
+                </div>                
+            </div>
+
+            <div class="form-group" [class.d-none]="moreAddressCount === 0">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Delivery Address*</label>
+                    </div>
+                    <div class="col-5">
+                        <!--<textarea style="width:100%;" required #address1Label1="ngModel" class="form-control" placeholder="Please enter address..." name="address11" [(ngModel)]="user.address.addresses[0].address"></textarea>-->
+                        <textarea style="width:100%;" #address1Label1="ngModel" class="form-control eCommerce-edit-border" placeholder="Please enter address..." name="address11" [(ngModel)]="user.address.addresses[0].address"></textarea>                
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="address1Label1.valid || address1Label1.untouched">Address is required</small>
+                    </div>
+                </div>
+            </div>
+            <!--Address[1]-->
+
+            <!--Address[2]-->
+            <div class="form-group" [class.d-none]="moreAddressCount <= 1">
+                <div class="row" style="margin-top: 5px; margin-bottom: 0px;">
+                    <div class="col-3"></div>
+                    <div class="col-1"></div>
+                    <!-- Flag-->
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode2}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode2}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode2}}"></span>
+                    </div>                                        
+                </div>
+            </div>            
+
+            <div class="form-group" [class.d-none]="moreAddressCount <= 1">
+                <div class="row" style="margin-top: 0px;">
+                    <div class="col-2"></div>
+                    <!-- Country-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <div class="row">
+                            <label class="eCommerce-anchor-background eCommerce-control-top-padding">Country*</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-2">
+                        <select (change)="onSelectAddressCountry(1, selectCountry2.value)" style="width: 100%;" required [class.is-invalid]="true" #selectCountry2="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="country2" [(ngModel)]="user.address.addresses[1].country">
+                            <option *ngFor="let country of moreAddress[1].countries">{{country}}</option>
+                        </select>
+                    </div>
+                                    
+                    <!--State-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">State*</label>
+                    </div>
+                    
+                    <div class="col-2">
+                        <select (change)="onSelectAddressState(1, selectState2.value)" style="width:100%;" required [class.is-invalid]="true" #selectState2="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="state2" [(ngModel)]="user.address.addresses[1].state">
+                            <option *ngFor="let state of moreAddress[1].states">{{state}}</option>
+                        </select>
+                    </div>
+                                    
+                </div>            
+            </div>
+            
+            <div class="form-group" [class.d-none]="moreAddressCount <= 1">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <!--City-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">City*</label>
+                    </div>
+                    <div class="col-2">
+                        <select (change)="onSelectAddressCity(1, selectCity2.value)" style="width:100%;" required [class.is-invalid]="true" #selectCity2="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="city2" [(ngModel)]="user.address.addresses[1].city">
+                            <option *ngFor="let city of moreAddress[1].cities">{{city}}</option>
+                        </select>
+                    </div>
+                    <!--Pincode-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Pincode*</label>
+                    </div>
+                    <div class="col-2">
+                        <!--<input type="text" required #pincodeLabel1="ngModel" [class.is-invalid]="pincodeLabel1.touched && !isValidPincode(moreAddress[0].pincodeText)" class="form-control" placeholder="654321" name="pincode1" [(ngModel)]="moreAddress[0].pincodeText"/>-->
+                        <input type="text" #pincodeLabel2="ngModel" [class.is-invalid]="pincodeLabel2.touched && !isValidPincode(user.address.addresses[1].pincode)" class="form-control eCommerce-edit-border" placeholder="654321" name="pincode2" [(ngModel)]="user.address.addresses[1].pincode"/>
+                    </div>                    
+                </div>
+
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="pincodeLabel2.untouched || isValidPincode(user.address.addresses[1].pincode)">Pincode is invalid</small>
+                    </div>  
+                </div>                
+            </div>
+
+            <div class="form-group" [class.d-none]="moreAddressCount <= 1">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Delivery Address*</label>
+                    </div>
+                    <div class="col-5">
+                        <!--<textarea style="width:100%;" required #address1Label1="ngModel" class="form-control" placeholder="Please enter address..." name="address11" [(ngModel)]="user.address.addresses[0].address"></textarea>-->
+                        <textarea style="width:100%;" #address1Label2="ngModel" class="form-control eCommerce-edit-border" placeholder="Please enter address..." name="address12" [(ngModel)]="user.address.addresses[1].address"></textarea>                
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="address1Label2.valid || address1Label2.untouched">Address is required</small>
+                    </div>
+                </div>
+            </div>           
+            <!--Address[2]-->
+
+            <!--Address[3]-->
+            <div class="form-group" [class.d-none]="moreAddressCount <= 2">
+                <div class="row" style="margin-top: 5px; margin-bottom: 0px;">
+                    <div class="col-3"></div>
+                    <div class="col-1"></div>
+                    <!-- Flag-->
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode3}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode3}}"></span>
+                    </div>
+                    <div class="col-1">
+                        <span class="fi fi-{{flagCode3}}"></span>
+                    </div>                                        
+                </div>
+            </div>            
+
+            <div class="form-group" [class.d-none]="moreAddressCount <= 2">
+                <div class="row" style="margin-top: 0px;">
+                    <div class="col-2"></div>
+                    <!-- Country-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <div class="row">
+                            <label class="eCommerce-anchor-background eCommerce-control-top-padding">Country*</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-2">
+                        <select (change)="onSelectAddressCountry(2, selectCountry3.value)" style="width: 100%;" required [class.is-invalid]="true" #selectCountry3="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="country3" [(ngModel)]="user.address.addresses[2].country">
+                            <option *ngFor="let country of moreAddress[1].countries">{{country}}</option>
+                        </select>
+                    </div>
+                                    
+                    <!--State-->
+                    <div class="col-1" style="margin-top: 5px;">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">State*</label>
+                    </div>
+                    
+                    <div class="col-2">
+                        <select (change)="onSelectAddressState(2, selectState3.value)" style="width:100%;" required [class.is-invalid]="true" #selectState3="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="state3" [(ngModel)]="user.address.addresses[2].state">
+                            <option *ngFor="let state of moreAddress[2].states">{{state}}</option>
+                        </select>
+                    </div>
+                                    
+                </div>            
+            </div>
+            
+            <div class="form-group" [class.d-none]="moreAddressCount <= 2">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <!--City-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">City*</label>
+                    </div>
+                    <div class="col-2">
+                        <select (change)="onSelectAddressCity(2, selectCity3.value)" style="width:100%;" required [class.is-invalid]="true" #selectCity3="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="city3" [(ngModel)]="user.address.addresses[2].city">
+                            <option *ngFor="let city of moreAddress[2].cities">{{city}}</option>
+                        </select>
+                    </div>
+                    <!--Pincode-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Pincode*</label>
+                    </div>
+                    <div class="col-2">
+                        <!--<input type="text" required #pincodeLabel1="ngModel" [class.is-invalid]="pincodeLabel1.touched && !isValidPincode(moreAddress[0].pincodeText)" class="form-control" placeholder="654321" name="pincode1" [(ngModel)]="moreAddress[0].pincodeText"/>-->
+                        <input type="text" #pincodeLabel3="ngModel" [class.is-invalid]="pincodeLabel3.touched && !isValidPincode(user.address.addresses[2].pincode)" class="form-control eCommerce-edit-border" placeholder="654321" name="pincode3" [(ngModel)]="user.address.addresses[2].pincode"/>
+                    </div>                    
+                </div>
+
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="pincodeLabel3.untouched || isValidPincode(user.address.addresses[2].pincode)">Pincode is invalid</small>
+                    </div>  
+                </div>                
+            </div>
+
+            <div class="form-group" [class.d-none]="moreAddressCount <= 2">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Delivery Address*</label>
+                    </div>
+                    <div class="col-5">
+                        <!--<textarea style="width:100%;" required #address1Label1="ngModel" class="form-control" placeholder="Please enter address..." name="address11" [(ngModel)]="user.address.addresses[0].address"></textarea>-->
+                        <textarea style="width:100%;" #address1Label3="ngModel" class="form-control eCommerce-edit-border" placeholder="Please enter address..." name="address13" [(ngModel)]="user.address.addresses[2].address"></textarea>                
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="address1Label3.valid || address1Label3.untouched">Address is required</small>
+                    </div>
+                </div>
+            </div>            
+            <!--Address[3]-->
+
+            <div class="form-group">
+                <!--More Address-->
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <button class="btn eCommerce-nav-button-change d-flex justify-content-center btn-sm" style="width:100%;" [disabled]="moreAddressCount === 3" (click)="onMoreAddress()">
+                            <i class="bi bi-plus-circle"></i>&nbsp; Add More Address &nbsp;
+                        </button>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn eCommerce-small-button-red d-flex justify-content-center btn-sm" style="width:100%;" [disabled]="moreAddressCount === 0" (click)="onDeleteAddress()">
+                            <i class="bi bi-dash-circle"></i>&nbsp; Delete Last Address &nbsp;
+                        </button>
+                    </div>                    
+                </div>
+            </div>            
+
+            <!--
+            <div class="form-group" >
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-2"></div>
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">{{address2}}</label>
+                    </div>
+                    <div class="col-5">
+                        <textarea style="width:100%;" #address2Label="ngModel" class="form-control" placeholder="Address 2" name="address2" [(ngModel)]="user.address2"></textarea>
+                    </div>                    
+                </div>
+            </div>
+            -->
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 19px;">
+                    <div class="col-2"></div>
+                    <!-- Subscription-->
+                    <div class="col-1" ></div>
+                    <div class="col-4">
+                        <input class="form-check-input" name="subscribe" style="border: 0.05em solid currentColor;" [(ngModel)]="user.subscribe" type="checkbox" />
+                        &nbsp;
+                        <label class="form-check-label"> Send me promotional offers</label>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 19px;">
+                    <div class="col-2"></div>
+                    <!-- Subscription-->
+                    <div class="col-1" ></div>
+                    <div class="col-4">
+                        <input class="form-check-input" name="subscribe" style="border: 0.05em solid currentColor;" [(ngModel)]="termsCondition" type="checkbox" />
+                        &nbsp;
+                        <label class="form-check-label"> I Accept with Terms and Condition</label>
+                    </div>                    
+                </div>
+            </div>            
+
+            <br>
+
+            <div class="form-group">
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-2"></div>
+                    <!-- Input Capcha-->
+                    <div class="col-1" >
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">Captcha*</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" required #capchaLabel="ngModel" [class.is-invalid]="capchaLabel.invalid && capchaLabel.touched" placeholder="Enter CaptchaText..." class="form-control eCommerce-edit-border" name="capcha" [(ngModel)]="inputCapcha"/>
+                    </div>
+                    <!-- Generated Capcha-->
+                    <div class="col-1">
+                        <label class="eCommerce-anchor-background eCommerce-control-top-padding">CaptchaText</label>
+                    </div>
+                    <div class="col-1">
+                        <a class="btn eCommerce-capcha"><b>{{generatedCapcha}}</b></a>
+                    </div>
+                    <div class="col-1">
+                        <a class="btn eCommerce-capcha" (click)="generateCapcha()">Refresh</a>
+                    </div>                                        
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <small class="text-danger" [class.d-none]="capchaLabel.untouched || isValidCapcha()">Invalid CapchaText</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-3"></div>
+                    <!--Registration button-->
+                    <div class="col-5 d-flex justify-content-center" >
+                        <button class="btn eCommerce-nav-button d-flex justify-content-center" style="width:100%;" (click)="onRegister(user)" [disabled]="userForm.form.invalid || !isValidPhoneNumber(user.phone) || !isValidPincode(pincodeText) || !isValidCapcha() || !doesAgreeTermsCondition()" type="submit">Registration</button>
+                    </div>                                 
+                </div>
+            </div>
+            &nbsp;
+        </form>
+    </div>
+</div>   

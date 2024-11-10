@@ -1,0 +1,506 @@
+<!--Main Navigation-->
+<body class="eCommerce-background">
+  <header class="eCommerce-background">
+    <!-- Sidebar -->
+    <div class="eCommerce-sidebar eCommerce-sidebar-show" id="sideBar">
+      <div class="accordion" id="sideTree">
+        <!--
+        <div>
+          <img class="img-responsive eCommerce-sidebar-image" style="border-radius: 50%; margin-left: 7px; margin-top: 10px;" src="assets/images/expand.png" title="expand" [class.d-none]="sideBarOpen" (click)="toggleSideBar(true)"/>
+          <img class="img-responsive eCommerce-sidebar-image" style="border-radius: 50%; margin-left: 143px; margin-top: 10px;" src="assets/images/collapse.png" ngbTooltip="collapse" placement="left" [class.d-none]="!sideBarOpen" (click)="toggleSideBar(false)"/>
+        </div>
+        <label class="eCommerce-sidebar-logo" [class.d-none]="!sideBarOpen"><b><img class="img-responsive" style="border-radius: 50%;" src="assets/images/welcome.png"/>{{title}}</b></label>
+
+        <label class="eCommerce-sidebar-heading" [class.d-none]="!sideBarOpen"><b>Category</b></label>
+        -->
+        <div>
+          <div class="row">
+            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 pl-1">
+              <label class="eCommerce-sidebar-logo" [class.d-none]="!sideBarOpen"><b><img class="img-responsive" style="border-radius: 50%;" src="assets/images/welcome.png"/>{{title}}</b></label>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 pl-8">
+              <img class="img-responsive eCommerce-sidebar-image" style="border-radius: 50%; margin-left: 7px; margin-top: 10px;" src="assets/images/expand.png" title="expand" [class.d-none]="sideBarOpen" (click)="toggleSideBar(true)"/>
+              <img class="img-responsive eCommerce-sidebar-image" style="border-radius: 50%; margin-left: 116px; margin-top: 10px;" src="assets/images/collapse.png" ngbTooltip="collapse" placement="left" [class.d-none]="!sideBarOpen" (click)="toggleSideBar(false)"/>
+            </div>
+          </div>
+        </div>
+
+        <label class="eCommerce-sidebar-heading" [class.d-none]="!sideBarOpen"><b>Category</b></label>   
+
+        <div class="accordion-item" [class.d-none]="!sideBarOpen" *ngFor="let category of categories">
+            <h2 class="accordion-header" id="{{category.categoryId}}">
+                <button class="accordion-button accordianButton eCommerce-sidebar-header" *ngIf="getPlusMinus(category.categoryLinkId) == '+'" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+category.categoryId" aria-expanded="true" [attr.aria-controls]="'collapse'+category.categoryId" (click)="onClickCategory(category.categoryLinkId)">
+                  <b><i class="bi bi-plus-circle"></i> {{category.CategoryName}}</b>
+                </button>
+                <button class="accordion-button accordianButton eCommerce-sidebar-header" *ngIf="getPlusMinus(category.categoryLinkId) == '-'" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+category.categoryId" aria-expanded="true" [attr.aria-controls]="'collapse'+category.categoryId" (click)="onClickCategory(category.categoryLinkId)">
+                  <b><i class="bi bi-dash-circle"></i> {{category.CategoryName}}</b>
+                </button>                                 
+            </h2>
+            <div id="collapse{{category.categoryId}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#sideTree">
+                <div class="accordion-body eCommerce-sidebar-body">
+                    <div *ngFor="let subCategory of category.subCategory">
+                      <div class="eCommerce-sidebar-button" (click)="onClickProductCategory(category.CategoryName, subCategory.subCategoryName)">{{subCategory.subCategoryName}}
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <label class="eCommerce-sidebar-heading" [class.d-none]="!sideBarOpen"><b>Offers</b></label>
+
+        <div class="accordion-item" [class.d-none]="!sideBarOpen">
+          <h2 class="accordion-header" id="Offers">
+              <button class="accordion-button accordianButton eCommerce-sidebar-header" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOffers'" aria-expanded="true" [attr.aria-controls]="'collapseOffers'">
+                <b>+ Offers</b>
+              </button>
+          </h2>
+          <div id="collapseOffers" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#sideTree">
+              <div class="accordion-body eCommerce-sidebar-body">
+                  <div>
+                    <div class="eCommerce-sidebar-button" (click)="onClickOffers()">Promotional Offers
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="accordion-item" [class.d-none]="!sideBarOpen">
+        <h2 class="accordion-header" id="DrGreen">
+            <button class="accordion-button accordianButton eCommerce-sidebar-header" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseDrGreen'" aria-expanded="true" [attr.aria-controls]="'collapseDrGreen'">
+              <b>+ Dr. Green</b>
+            </button>
+        </h2>
+        <div id="collapseDrGreen" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#sideTree">
+            <div class="accordion-body eCommerce-sidebar-body">
+                <div>
+                  <div class="eCommerce-sidebar-button" (click)="onClickDrGreen()">Call a Plant Doctor
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>      
+
+      </div>
+    </div>
+    
+    <!-- Sidebar -->
+
+    <!-- Navigation Pane -->
+    <nav class="navbar navbar-expand-lg eCommerce-sidebar-margin-expand eCommerce-nav-background" id="navBar">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor" aria-controls="navbarColor" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a routerLink="home" class="btn eCommerce-anchor-background" style="border: 1px solid rgb(51, 155, 124);"><b><i class="bi bi-house-heart-fill"></i> Home</b></a>
+            </li>
+            &nbsp;&nbsp;
+
+            <li class="nav-item">
+              <a routerLink="shoppingcart" class="btn eCommerce-cart-text" [class.d-none]="!isLoginHide || !isCompanyPaymentHide" ngbTooltip="My Shopping Cart" placement="right"><b><i class="bi bi-cart-check-fill"></i></b> ({{cartCount}})</a>
+            </li>
+            <!--tooltipClass="eCommerce-ngbToolTip"-->
+            &nbsp; &nbsp; &nbsp;
+
+            <li class="nav-item dropdown" ngbDropdown [class.d-none]="isProductHide">
+              <a class="nav-link dropdown-toggle eCommerce-anchor-background" style="margin-top: 0%; border: 1px solid rgb(51, 155, 124); border-radius: 6px;" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                <b>Manage</b>
+              </a>
+              <ul class="dropdown-menu eCommerce-menu-background" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+                <li ngbDropdownItem class="eCommerce-box" style="height: 50%;"><a routerLink="inventory" class="btn eCommerce-anchor-background"><b><i class="bi bi-border-width"></i>&nbsp;&nbsp;My Inventory</b></a></li>
+                <li ngbDropdownItem class="eCommerce-box" style="height: 50%;"><a routerLink="existingproduct" class="btn eCommerce-anchor-background"><b><i class="bi bi-border-style"></i>&nbsp;&nbsp;Other Supplier Inventory</b></a></li>
+                <li ngbDropdownItem class="eCommerce-box" style="height: 50%;"><a routerLink="orders" class="btn eCommerce-anchor-background"><b><i class="bi bi-book-half"></i>&nbsp;&nbsp;My Orders</b></a></li>
+                <li ngbDropdownItem class="eCommerce-box" style="height: 50%;"><a routerLink="supplierpayment" class="btn eCommerce-anchor-background"><b><i class="bi bi-credit-card"></i>&nbsp;&nbsp;My Payments</b></a></li>              
+              </ul>
+            </li>
+            &nbsp;
+
+            <li class="nav-item">
+              <a routerLink="orderhistory" class="btn eCommerce-nav-button my-2 my-sm-0" [class.d-none]="!isLoginHide || !isOrderHistoryHide" ngbTooltip="My Order History" placement="right"><b>Order History</b></a>
+            </li>            
+
+            <li class="nav-item" [class.d-none]="isCompanyPaymentHide">
+              <a class="btn eCommerce-nav-button my-2 my-sm-0" routerLink="companypayment"><b>Company Payments</b></a>
+            </li>             
+            &nbsp; &nbsp; &nbsp;
+
+            <!--
+            <li>
+              <select (change)="onSelectCity(selectCity.value)" [class.d-none]="isCityHide" #selectCity="ngModel" class="custom-select eCommerce-control-padding" name="city" [(ngModel)]="city">    
+                <option value="">Select your city</option>
+                <option *ngFor="let city of cities">{{city}}</option>
+              </select>                          
+            </li>
+            &nbsp; &nbsp; &nbsp;
+            <li>
+              <select (blur)="onSelectStore('')" required [class.d-none]="isStoreHide" class="custom-select eCommerce-control-padding" name="store" >    
+                <option value="">Nearby stores...</option>
+                <option *ngFor="let store of stores" title="{{store}}">{{store}}</option>
+              </select>                          
+            </li>
+            &nbsp; &nbsp; &nbsp;
+            -->
+            <li class="nav-item">
+              <a class="btn eCommerce-anchor-background"><b>Call us </b><i class="bi bi-telephone-fill"></i><b> +(91)-1-800-9Bagwani</b></a>
+            </li>
+
+            &nbsp;&nbsp;&nbsp;
+
+            <li class="nav-item">
+              <a class="btn eCommerce-nav-button my-2 my-sm-0" routerLink="orderstatus"><b>Order Status</b></a>
+            </li>            
+          </ul>
+
+          <ul class="navbar-nav d-flex justify-content-left">
+            <label class="text-danger d-flex justify-content-center" [class.d-none]="!isLoginFailed"><b>Login Failed</b></label>
+          </ul>
+
+          &nbsp;
+
+          <!--
+          <ul class="navbar-nav d-flex justify-content-left">
+            <label class="text-danger d-flex justify-content-center" [class.d-none]="!isPasswordMatch">Password donot match</label>
+          </ul>
+          
+          <ul class="navbar-nav d-flex justify-content-left">
+            <label class="text-danger d-flex justify-content-center" [class.d-none]="!isIncorrectPassword">Incorrect password</label>
+          </ul>          
+          -->
+          <ul class="navbar-nav d-flex justify-content-left">
+            <!--<label class="text-dark d-flex justify-content-center" [class.d-none]="!isCurrentLogin"><b>Please login first !!</b></label>-->
+          </ul>          
+
+          <ul class="navbar-nav d-flex justify-content-left">
+
+            <li class="nav-item">
+              <a class="btn eCommerce-welcome-background" [class.d-none]="!isLoginHide"><b>Hello {{user}}</b></a>
+            </li>
+
+            <li class="nav-item dropdown" ngbDropdown [class.d-none]="!isLoginHide">
+              <a class="nav-link dropdown-toggle eCommerce-anchor-background" style="margin-top: 0%;" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                <b><img class="img-responsive" style="border-radius: 50%;" src="assets/images/profile.png"/></b>
+              </a>
+              <ul class="dropdown-menu eCommerce-menu-background" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+                <li ngbDropdownItem class="eCommerce-box" style="height: 50%;"><a routerLink="home" class="btn eCommerce-anchor-background" [class.d-none]="!isLoginHide" (click)="onEditUser()"><b><i class="bi bi-person-bounding-box"></i>&nbsp;&nbsp;Edit Profile</b></a></li>
+                <li ngbDropdownItem class="eCommerce-box" style="height: 50%;"><a class="btn eCommerce-anchor-background" [class.d-none]="!isLoginHide" data-bs-toggle="modal" data-bs-target="#passwordModal"><b><i class="bi bi-braces-asterisk"></i>&nbsp;&nbsp;Change Password</b></a></li>
+                <li ngbDropdownItem class="eCommerce-box" style="height: 50%;"><a routerLink="home" class="btn eCommerce-logout" [class.d-none]="!isLoginHide" (click)="onLogout()"><b><i class="bi bi-person-circle"></i>&nbsp;&nbsp;Logout</b></a></li>
+
+              </ul>
+            </li>
+            
+            <!--
+            <li class="nav-item dropdown" ngbDropdown [class.d-none]="isLoginHide">
+              <a class="nav-link dropdown-toggle eCommerce-anchor-background" style="margin-top: 0%;" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                <b>Login</b>
+              </a>
+              <ul class="dropdown-menu eCommerce-nav-background" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+                <li ngbDropdownItem style="height: 50%;"><a class="btn eCommerce-anchor-background" [class.d-none]="isLoginHide" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                <li ngbDropdownItem style="height: 50%;"><a class="btn eCommerce-anchor-background" [class.d-none]="isLoginHide" data-bs-toggle="modal" data-bs-target="#renewModal" (click)="onForgotPassword()">Forgot Password</a></li>
+              </ul>
+            </li>            
+            -->
+
+            <!--
+            <li class="nav-item">
+              <a class="btn eCommerce-anchor-background" [class.d-none]="isLoginHide" data-bs-toggle="modal" data-bs-target="#renewModal" (click)="onForgotPassword()">Forgot Password</a>
+            </li> 
+            -->
+
+            <li class="nav-item">
+              <a class="btn eCommerce-anchor-background" style="border: 1px solid rgb(51, 155, 124);" (click)="onLogin()" [class.d-none]="isLoginHide" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+            </li>       
+            &nbsp;
+            <li class="nav-item">
+              <a routerLink="register" class="btn eCommerce-anchor-background" style="border: 1px solid rgb(51, 155, 124);" [class.d-none]="isLoginHide">Register</a>
+            </li>
+
+            <form class="d-flex">
+              <input class="form-control me-sm-2 eCommerce-round-control eCommerce-search-icon" #searchLabel="ngModel" name="search" style="border-radius: 21px;" type="text" placeholder="Search for plants, seeds" [(ngModel)]="search">
+              <button class="btn eCommerce-nav-button my-2 my-sm-0" (click)="onSearch()"><b>Search</b></button>
+            </form>            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navigation Pane -->
+
+    <!--
+    <nav class="navbar navbar-expand-lg eCommerce-sidebar-margin-expand eCommerce-nav-background" id="navLogin">
+      <div class="container-fluid">
+        <label class="text-warning d-flex justify-content-center"><b>Login Failed</b></label>
+      </div>
+    </nav>
+    -->
+
+    <!--Login Successful TODO-->
+
+    <!--
+    <nav id="navBarLogin" *ngIf="!isLoginSuccessful" class="navbar navbar-expand-lg eCommerce-sidebar-margin-expand eCommerce-login-failed" >
+      <div class="container-fluid">
+        <label class="eCommerce-login-failed-label"><b>Login failed. Please try again.!!</b></label>
+      </div>
+    </nav>
+    -->
+
+    <!-- Modal Login-->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content eCommerce-background">
+          
+          <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+              <h3 class="modal-title fs-5" id="loginModalLabel"><img class="img-responsive" style="border-radius: 50%; margin-bottom: 15px;" src="assets/images/welcome-flip.png"/>{{title}} <img class="img-responsive" style="border-radius: 50%; margin-bottom: 15px;" src="assets/images/welcome.png"/></h3>
+          </div>
+          
+          <div class="modal-body eCommerce-background eCommerce-round-control">
+            
+            <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+
+              <div class="row">
+                <div class="col-md-2" style="margin-top: 13px;"> 
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">MobileNo</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="margin-top: 13px;">
+                  <input type="text" #phoneLabel="ngModel" class="form-control eCommerce-round-control" placeholder="9898989898" name="phone" [(ngModel)]="loginPhone"/>
+                </div>
+              </div>
+              
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-2">
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">Password</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <input type="password" #phoneLabel="ngModel" class="form-control eCommerce-round-control" name="password" [(ngModel)]="loginPassword"/>
+                </div>
+              </div>
+
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-2">
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">Captcha</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <input type="text" #capchaLabel="ngModel" class="form-control eCommerce-round-control" placeholder="Enter Captcha..." name="capcha" [(ngModel)]="inputCapcha"/>
+                </div>
+              </div>
+              
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-2">
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">Captcha</label>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                  <img class="img-responsive" style="margin-bottom: 1px; object-fit: contain; width: 120px; max-width: 115%; max-height: 100%;" [src]="'assets/eCommerce-Images/Captcha/'+captchaImageNo+'.png'"/>
+                </div>
+                <!--<div class="col-md-2"></div>-->
+                <div class="col-md-2">
+                  <a class="btn eCommerce-capcha" (click)="reGenerateCapcha()">Refresh</a>
+                </div>
+              </div>
+
+              <!--
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-2">
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">Capcha</label>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                  <a class="btn eCommerce-capcha"><b>{{generatedCapcha}}</b></a>
+                </div>
+                &nbsp;
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                  <a class="btn eCommerce-capcha" (click)="generateCapcha()">Refresh</a>
+                </div>
+              </div>
+              -->                              
+
+              <div class="row eCommerce-login-top-padding" style="margin-top: 1px;">
+                <div class="col-md-3"></div>
+                <div class="col-md-9" style="margin-bottom: 13px;">
+                  <a class="btn eCommerce-welcome-background" [class.d-none]="isLoginHide" data-bs-toggle="modal" data-bs-target="#renewModal" (click)="onForgotPassword()"><b><u>Forgot Password</u></b></a>
+                </div>
+              </div>              
+              
+              <div class="row eCommerce-login-top-padding" style="margin-top: 1px;">
+                <div class="col-md-6" style="margin-bottom: 13px;">
+                  <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [disabled]="!isValidPhoneNumber(loginPhone) || !isValidCapcha()" [attr.data-bs-dismiss]="'modal'" (click)="onClickLogin()">Login</button>
+                </div>
+                <div class="col-md-6" style="margin-bottom: 13px;">
+                  <button class="btn eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">Cancel</button>
+                </div>                
+              </div>
+
+              <!--
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-12" style="margin-bottom: 13px;">
+                  <button class="btn eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">Cancel</button>
+                </div>
+              </div>                     
+              -->
+            </div>  
+          </div>
+        </div>
+
+      </div>
+    </div>          
+    <!-- Modal Login-->
+
+    <!-- Modal Edit Password-->
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content eCommerce-background">
+          
+          <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+              <h3 class="modal-title fs-5" id="passwordModalLabel">Change Password</h3>
+          </div>
+          
+          <div class="modal-body eCommerce-background eCommerce-round-control">
+            
+            <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+
+              <div class="row">
+                <div class="col-md-2" style="margin-top: 13px;"> 
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">Existing Password*</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="margin-top: 13px;">
+                  <input type="password" #existingPasswordLabel="ngModel" class="form-control eCommerce-round-control" placeholder="Enter Existing password" name="existingPassword" [(ngModel)]="existingPassword"/>
+                </div>
+              </div>
+
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-2">
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">New Password*</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <input type="password" #newPasswordLabel="ngModel" class="form-control eCommerce-round-control" placeholder="Enter New password" name="newPassword" [(ngModel)]="newPassword"/>
+                </div>
+              </div>
+
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-2">
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">Verify Password*</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <input type="password" #verifyPasswordLabel="ngModel" class="form-control eCommerce-round-control" placeholder="Re-enter New password" name="verifyPassword" [(ngModel)]="verifyPassword"/>
+                </div>
+              </div>              
+              
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-6" style="margin-top: 13px; margin-bottom: 13px;">
+                  <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'" (click)="onClickUpdatePassword()">Reset</button>
+                </div>
+                <div class="col-md-6" style="margin-top: 13px; margin-bottom: 13px;">
+                  <button class="btn eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">Cancel</button>
+                </div>                
+              </div>
+              <!--
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-12" style="margin-bottom: 13px;">
+                  <button class="btn eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">Cancel</button>
+                </div>
+              </div>                     
+              -->
+            </div>  
+          </div>
+        </div>
+
+      </div>
+    </div>          
+    <!-- Modal Edit Password-->
+
+    <!-- Modal Forget Password-->
+    <div class="modal fade" id="renewModal" tabindex="-1" aria-labelledby="renewModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content eCommerce-background">
+          
+          <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+              <h3 class="modal-title fs-5" id="renewPasswordModalLabel">Reset Password</h3>
+          </div>
+          
+          <div class="modal-body eCommerce-background eCommerce-round-control">
+            
+            <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+
+              <div class="row">
+                <div class="col-md-2" style="margin-top: 13px;"> 
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">Mobile No*</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="margin-top: 13px;">
+                  <input type="text" #mobileNoLabel="ngModel" class="form-control eCommerce-round-control" placeholder="Enter Mobile No" name="mobileNo" [(ngModel)]="mobileNo"/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4"> 
+                </div>
+                <div class="col-md-8" style="margin-top: 1px; margin-bottom: 1px;">
+                  <small class="text-danger" [class.d-none]="isValidPhoneNumber(mobileNo)">&nbsp;Invalid mobile no</small>
+                </div>               
+              </div>
+              &nbsp;
+              <div class="row">
+                <div class="col-md-2"> 
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">New Password*</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <input type="password" #renewPasswordLabel="ngModel" class="form-control eCommerce-round-control" placeholder="Enter new password" name="renewPassword" [(ngModel)]="renewPassword"/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2"> 
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding">OTP*</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <input type="text" #OTPLabel="ngModel" class="form-control eCommerce-round-control" placeholder="Enter OTP" name="OTP" [(ngModel)]="OTP"/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6" style="margin-top: 10px;">
+                  <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="font-size: 11px; width:100%;" (click)="onClickResetOTP()">Generate OTP</button>
+                </div>
+                <div class="col-md-5" style="margin-top: 10px;">
+                  <label class="eCommerce-anchor-background eCommerce-control-top-padding" style="font-size: 13px;">{{secondsLeft}} : secs</label>
+                  <!--<timer interval="1000">{{seconds}} seconds</timer>-->
+                </div>
+              </div>              
+              
+              <div class="row eCommerce-login-top-padding">
+                <div class="col-md-6" style="margin-top: 18px; margin-bottom: 13px;">
+                  <button class="btn eCommerce-nav-button d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'" (click)="onClickResetPassword()">Reset</button>
+                </div>
+                <div class="col-md-6" style="margin-top: 18px; margin-bottom: 13px;">
+                  <button class="btn eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">Cancel</button>
+                </div>                 
+              </div>              
+              
+            </div>  
+          </div>
+        </div>
+
+      </div>
+    </div>          
+    <!-- Modal Forget Password-->
+    
+    <router-outlet></router-outlet>
+  </header>
+
+  <!-- Footer Content -->
+  <footer class="border-top footer text-muted eCommerce-background eCommerce-footer">
+    <div class="w3-container eCommerce-footer-margin-padding eCommerce-anchor-background">
+      <span>Copyright &copy; 2025 - MI-25 - Privacy, All rights reserved</span>
+    </div>
+  </footer> 
+</body> 

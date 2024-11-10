@@ -1,0 +1,70 @@
+<div class="row">
+
+    <!-- Modal Upload Images -->
+    <div class="modal fade" id="uploadImages" tabindex="-1" aria-labelledby="uploadImagesLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content eCommerce-background">
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5" id="deleteProductLabel">Delete Product?</h3>                 
+                </div>
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        <div class="row" style="margin-bottom: 13px;">
+                            <div class="col-md-6" style="margin-top: 13px;"> 
+                                <a class="btn btn-sm eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">
+                                    Yes
+                                </a>        
+                            </div>
+                            <div class="col-md-6" style="margin-top: 13px;"> 
+                                <a class="btn btn-sm eCommerce-small-button-two d-flex justify-content-center eCommerce-box-shadow" style="width:100%;" [attr.data-bs-dismiss]="'modal'">
+                                    No
+                                </a>
+                            </div>                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+    <!-- Modal Upload Images -->
+
+    <div class="col-md-2" style="margin-top: 13px;"> 
+        <a (click)="onDeleteVariable()" class="btn btn-sm eCommerce-small-button-red d-flex justify-content-center eCommerce-box-shadow" style="width:100%;">
+            <i class="bi bi-dash-circle"></i>&nbsp;Delete&nbsp;<i class="bi bi-arrow-bar-right"></i>
+        </a>        
+    </div>
+
+    <div class="col-md-1" style="margin: 0 auto; margin-top: 14px;">
+        <select (change)="onSelectSize(selectSize.value)" style="width: 160%;" required [class.is-invalid]="true" #selectSize="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="size" [(ngModel)]="size">
+            <option *ngFor="let size of sizes" title="{{size.description}}" value="{{size.sizeCode}}">{{size.sizeCode}}</option>
+        </select>
+    </div>
+    &nbsp;&nbsp;
+    <div class="col-md-1 justify-content-center" style="width: fit-content; margin-top: 13px;">
+        <select (change)="onSelectColor(selectColor.value)" required [class.is-invalid]="true" #selectColor="ngModel" class="custom-select eCommerce-control-padding eCommerce-edit-border" name="color" [(ngModel)]="color">
+            <option *ngFor="let color of colors" title="{{color.description}}" value="{{color.description}}">{{color.description}}</option>
+        </select>
+    </div>
+    <div class="col-md-1" style="width: fit-content; margin-top: 13px;">
+        <a class="btn btn-sm" [attr.style]="'background-color:rgb('+varColor[0].red+', '+varColor[0].green+', '+varColor[0].blue+'); width:50%; height: 60%; border: 1px solid #121212e6;'">
+        </a>
+    </div>
+    <div class="col-md-1" style="margin-top: 10px; width:13%;">
+        <input type="number" min="0" max="100000" (change)="onUpdatePrice()" #productPrice="ngModel" class="form-control eCommerce-round-control" name="price" [(ngModel)]="productVariable.price"/>
+    </div>
+
+    <div class="col-md-1" style="margin-top: 10px; width:10%;">
+        <input type="number" min="0" max="100" readonly (change)="onUpdateDiscount()" #productDiscount="ngModel" class="form-control eCommerce-round-control" name="discount" [(ngModel)]="productVariable.discount"/>
+    </div>
+
+    <div class="col-md-1" style="margin-top: 10px; width:13%;">
+        <input type="number" min="0" max="100000" (change)="onUpdateInventory()" #productInventory="ngModel" class="form-control eCommerce-round-control" name="inventory" [(ngModel)]="productVariable.inventory"/>
+    </div>
+
+    <!--<div class="col-md-1"></div>-->
+    <div class="col-md-2" style="margin-top: 13px;">
+        <a (click)="onUploadImage()" [attr.class]="'btn btn-sm d-flex justify-content-center ' + imageClickStatus + ' eCommerce-box-shadow'" style="width:100%;">
+            <i class="bi bi-binoculars"></i>&nbsp; Images
+        </a>  
+    </div>      
+</div>

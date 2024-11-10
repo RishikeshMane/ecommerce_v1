@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+/*@import '~bootstrap/scss/_variables.scss';*/
+
+@import './eCommerce-datatable-material.css';
+@import './eCommerce-ngbToolTip.css';
+
+
+
+
+
+

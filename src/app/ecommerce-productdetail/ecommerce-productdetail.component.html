@@ -1,0 +1,492 @@
+<div class="container-fluid">
+
+    <br>
+    <!-- Breadcrumb -->
+    <div id="breadcrumb" class="eCommerce-sidebar-home-expand">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <!--<li class="breadcrumb-item"><a routerLink="home">Home</a></li>-->
+                <li class="breadcrumbIcon"><a class="eCommerce-register-label" routerLink="home">Home&nbsp;</a></li>
+                <li class="bi-chevron-double-right breadcrumbIcon eCommerce-register-label"><a class="eCommerce-register-label" routerLink="products" (click)="onProductsClick()">&nbsp;Category&nbsp;</a></li>
+                <li class="bi-chevron-double-right breadcrumbIcon eCommerce-register-label" aria-current="page">&nbsp;Detail&nbsp;</li>
+            </ol>
+        </nav>
+    </div>    
+    <!-- Breadcrumb -->
+
+    <!-- Title -->
+    <div id="productstitle" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-2"></div> 
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 pl-8">    
+                <label class="eCommerce-home-best-selling d-flex justify-content-center" style="text-align: center;"><b>{{productDetails.category}} - {{productDetails.subCategory}}</b></label>
+            </div>
+            <div class="col-2"></div>    
+        </div>
+    </div>    
+    <!-- Title -->
+
+    <br>
+
+    <!-- Home Image -->
+    <div id="productshome" class="eCommerce-sidebar-home-expand">
+        <div class="row pb-3" >
+            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 pl-5" style="height:440px; width:40%; margin-top: 10px; margin-left: 10px;">
+                <div class="card">
+                    <img src="{{getHeadImage()}}" class="card-img-top rounded" style="background-color:white; border: 10px solid rgb(251, 251, 251); object-fit: cover; width: 100%; height: 600px; max-width: 100%; max-height: 100%;"/>
+                </div>
+                <br>
+                <div>
+                    <label class="eCommerce-anchor-background-header" style="margin-top: 5px;"><b>{{selectedSizeName}} / {{selectedColorName}}, {{productDetails.category}} - {{productDetails.subCategory}}</b></label>
+                </div>
+                <div class="row eCommerce-login-top-padding eCommerce-box-shadow-inset eCommerce-image-vscroll" style="margin-left: 3px;">
+                    <div class="card-body row container">
+                        <div class="container rounded p-2">
+                            <div class="row">
+                                <div class= "col-md-2 eCommerce-image-container rounded" *ngFor="let productImage of productImages let i = index">
+                                    <img src="{{productImage}}" [attr.class]="'rounded eCommerce-product-image ' +  imageBorderStyle[i]" style="margin-left: 2px;  margin-top: 1px;" data-toggle="tooltip" data-placement="top" (click)="onImageClick(i, productImage)"/>
+                                </div>                                  
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="col-7">
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; margin-top: 10px; text-align: left;"><b>{{productDetails.title}}</b></label> 
+                </div>
+                <div>                    
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 50px; text-align: left;" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                    </svg>                                      
+                    <label class="eCommerce-home-heading" style="margin-left: 1px; text-align: left;"><b>{{selectedPrice}}.00</b></label> 
+                </div>
+
+                <div>
+                    <a class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                    <a class="eCommerce-home-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-half"></i></b></a>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;"><b>Description:</b></label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;">{{productDetails.description}}</label> 
+                </div>
+
+                <br>
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;">Select size:</label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-best-selling" style="margin-left: 50px; text-align: left;">.</label> 
+                    <button *ngFor="let size of sizes let i = index" [attr.class]="'btn ' + sizeStyle[i]" style="margin-left: 5px;" (click)="onSizeClick(i)"><b>{{size.sizeCode}}</b></button>        
+                </div>
+                <br>
+                
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;">Select color:</label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-best-selling" style="margin-left: 50px; text-align: left;">.</label> 
+                    <button class="btn" *ngFor="let color of colors let i = index" [attr.style]="'margin-left: 5px; background:rgb(' + colorStyle[i].red + ',' +  colorStyle[i].green + ',' + colorStyle[i].blue + '); color:rgb(251, 251, 251);'" [attr.class]="colorBorderStyle[i]" (click)="onColorClick(i)"><b>{{color.description}}</b></button>        
+                </div>
+                <br>
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;">Color</label> 
+                </div>
+                <div>
+                    <label class="eCommerce-home-best-selling" style="margin-left: 50px; text-align: left;">.</label> 
+                    <a class="btn eCommerce-home-best-selling"><b><i class="bi bi-patch-check"></i></b></a>
+                    <button class="btn" [attr.style]="'margin-left: 5px; background:rgb(' + colorStyle[selectedColor].red + ',' +  colorStyle[selectedColor].green + ',' + colorStyle[selectedColor].blue + '); color:rgb(251, 251, 251); border: 4px solid rgb(128, 128, 128); border-radius:15px;'"><b>{{colors[selectedColor].description}}</b></button>        
+                    <a class="btn eCommerce-home-best-selling"><b><i class="bi bi-patch-check"></i></b></a>
+                </div>
+
+                <br>
+                <br>
+                <div>
+                    <input type="text" #checkDeliveryLabel="ngModel" placeholder="Enter Your Pincode" style="margin-left: 50px; text-align: left; height: 40px;" class="eCommerce-round-control" name="checkDelivery" [(ngModel)]="deliveryPincode"/>
+                    <button class="btn eCommerce-checkdelivery" (click)="onCheckDelivery()" style="margin-left: 5px; margin-bottom: 5px;"><b>Check Delivery</b></button>
+                </div>
+                <div>
+                    <small class="text-danger" style="margin-left: 50px; text-align: left;" [class.d-none]="isDelivery !== 'failure'"><b>This Product cannot be delivered at pincode {{showPincode}}</b></small>
+                </div>
+                <div>
+                    <small class="eCommerce-pagination" style="margin-left: 50px; text-align: left;" [class.d-none]="isDelivery !== 'success'"><b>This Product is deliverable at pincode {{showPincode}}</b></small>
+                </div>                               
+                <div>
+                    <small class="eCommerce-pagination" style="margin-left: 50px; text-align: left;" [class.d-none]="isDelivery !== 'success'"><b>Please proceed with the shopping cart</b></small>
+                </div>
+
+                <br>
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;">Store:</label> 
+                </div>
+                <div>
+                    <label class="eCommerce-products-store" style="margin-left: 50px; text-align: left;"><b>{{storeName}}, {{city }} {{pincode}}</b></label> 
+                </div>
+                <br>
+
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left; color:blue"><b>Items left:</b></label> 
+                </div>
+                <div>
+                    <label class="eCommerce-products-itemsleft" style="margin-left: 50px; text-align: left;"><b>{{selectedCount}}</b></label> 
+                </div>
+                <br>                
+                
+                <div>
+                    <label class="eCommerce-home-heading" style="margin-left: 50px; text-align: left;">Count</label> 
+                </div>                  
+                <div>
+                    <a class="btn eCommerce-home-count" style="margin-left: 50px; text-align: left; color: rgb(51, 155, 124); border: 1px solid rgb(51, 155, 124);" (click)="onCountDecrement()"><b><i class="bi bi-dash-circle-fill"></i></b></a>
+                    &nbsp;
+                    <label class="eCommerce-home-count" style="margin-left: 2px; margin-right: 2px; margin-top: 10px;"><b>{{count}}</b></label> 
+                    &nbsp;
+                    <a class="btn eCommerce-home-count" style="margin-left: 2px; text-align: left; color: rgb(51, 155, 124); border: 1px solid rgb(51, 155, 124);" (click)="onCountIncrement()"><b><i class="bi bi-plus-circle-fill"></i></b></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn eCommerce-nav-button" style="margin-left: 5px;" (click)="onClickShoppingCart()"><b>Add to Shopping Cart</b></button>
+                    &nbsp;&nbsp;
+                    <button class="btn eCommerce-nav-button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#shippingAddressModal" (click)="onBuyNow()"><b>Buy Now</b></button>        
+                </div>
+
+                <div>
+                    <small class="eCommerce-checkdelivery-text" style="margin-top: 50px; margin-left: 50px; text-align: left;"><b>Please click "Check Delivery" button before purchase !!</b></small>
+                </div>
+
+                <div>
+                    <small class="eCommerce-checkdelivery-text" style="margin-top: 50px; margin-left: 50px; text-align: left;">Handling charges of ₹ {{handlingCharges}} will be added during shipment</small>
+                </div>
+                
+                <div>
+                    <small class="eCommerce-checkdelivery-text" style="margin-top: 50px; margin-left: 50px; text-align: left;">Online Transaction fees of {{precentageFees}} % will be added during shipment</small>
+                </div>                
+
+                <div>
+                    <small class="text-danger" style="margin-top: 50px; margin-left: 50px; text-align: left;" [class.d-none]="canDelivered == 'true'"><b>This Product cannot be delivered at pincode {{loginPincode}}</b></small>
+                </div>
+                <div>
+                    <small class="eCommerce-pagination" style="margin-top: 50px; margin-left: 50px; text-align: left;" [class.d-none]="isLoginFirst == 'true'"><b>Please register (if not) first and login to proceed to Shopping Cart</b></small>
+                </div>                                
+                <br>                
+            </div>            
+        </div>
+    </div>
+    <!-- Home Image -->
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Goes well with -->
+    <div *ngIf="goesWellWith.length > 0">
+        <div id="goeswell" class="eCommerce-sidebar-home-expand">
+            <div class="row">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 pl-10">    
+                    <label class="eCommerce-home-best-selling" style="margin-left: 10px;"><b>Goes Well With</b></label>
+                </div>
+                <div class="col-2"></div>    
+            </div>
+        </div>
+
+        <div id="goeswellProduct" class="eCommerce-sidebar-home-expand">      
+            <div class="row pb-3" style="background-color:white; height:275px;">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:240px; width:16%; margin-top: 10px; margin-left: 10px;">
+                    <img src="{{getGoesWellImage(0)}}" ngbTooltip="{{goesWellWithTooltip(0)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 215px; max-width: 100%; max-height: 100%;" (click)="onGoesWellClick(0)"/>
+                    <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooter(0)}}</b></label>
+                    <div *ngIf="1 <= goesWellWith.length" class="pl-1 d-flex justify-content-center">
+                        <label class="eCommerce-products-goeswwell" style="margin-top: 5px;"><b>Price :</b></label>  
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 5px; margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="eCommerce-products-goeswwell bi bi-currency-rupee" viewBox="0 0 16 16">
+                            <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                        </svg>
+                        <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooterPrice(0)}}</b></label>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:240px; width:15%; margin-top: 10px; margin-left: 10px;">
+                    <img src="{{getGoesWellImage(1)}}" ngbTooltip="{{goesWellWithTooltip(1)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 215px; max-width: 100%; max-height: 100%;" (click)="onGoesWellClick(1)"/>
+                    <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooter(1)}}</b></label>
+                    <div *ngIf="2 <= goesWellWith.length" class="pl-1 d-flex justify-content-center">
+                        <label class="eCommerce-products-goeswwell" style="margin-top: 5px;"><b>Price :</b></label>  
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 5px; margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="eCommerce-products-goeswwell bi bi-currency-rupee" viewBox="0 0 16 16">
+                            <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                        </svg>
+                        <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooterPrice(1)}}</b></label>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:240px; width:16%; margin-top: 10px; margin-left: 10px;">
+                    <img src="{{getGoesWellImage(2)}}" ngbTooltip="{{goesWellWithTooltip(2)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 215px; max-width: 100%; max-height: 100%;" (click)="onGoesWellClick(2)"/>
+                    <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooter(2)}}</b></label>
+                    <div *ngIf="3 <= goesWellWith.length" class="pl-1 d-flex justify-content-center">
+                        <label class="eCommerce-products-goeswwell" style="margin-top: 5px;"><b>Price :</b></label>  
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 5px; margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="eCommerce-products-goeswwell bi bi-currency-rupee" viewBox="0 0 16 16">
+                            <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                        </svg>
+                        <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooterPrice(2)}}</b></label>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:240px; width:15%; margin-top: 10px; margin-left: 10px;">
+                    <img src="{{getGoesWellImage(3)}}" ngbTooltip="{{goesWellWithTooltip(3)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 215px; max-width: 100%; max-height: 100%;" (click)="onGoesWellClick(3)"/>
+                    <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooter(3)}}</b></label>
+                    <div *ngIf="4 <= goesWellWith.length" class="pl-1 d-flex justify-content-center">
+                        <label class="eCommerce-products-goeswwell" style="margin-top: 5px;"><b>Price :</b></label>  
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 5px; margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="eCommerce-products-goeswwell bi bi-currency-rupee" viewBox="0 0 16 16">
+                            <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                        </svg>
+                        <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooterPrice(3)}}</b></label>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:240px; width:16%; margin-top: 10px; margin-left: 10px;">
+                    <img src="{{getGoesWellImage(4)}}" ngbTooltip="{{goesWellWithTooltip(4)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 215px; max-width: 100%; max-height: 100%;" (click)="onGoesWellClick(4)"/>
+                    <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooter(4)}}</b></label>
+                    <div *ngIf="5 <= goesWellWith.length" class="pl-1 d-flex justify-content-center">
+                        <label class="eCommerce-products-goeswwell" style="margin-top: 5px;"><b>Price :</b></label>  
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 5px; margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="eCommerce-products-goeswwell bi bi-currency-rupee" viewBox="0 0 16 16">
+                            <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                        </svg>
+                        <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooterPrice(4)}}</b></label>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 pl-2" style="background-color:white; height:240px; width:16%; margin-top: 10px; margin-left: 10px;">
+                    <img src="{{getGoesWellImage(5)}}" ngbTooltip="{{goesWellWithTooltip(5)}}" class="card-img-top rounded eCommerce-home-card-image" style="background-color:white; object-fit: cover; height: 215px; max-width: 100%; max-height: 100%;" (click)="onGoesWellClick(5)"/>
+                    <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooter(5)}}</b></label>
+                    <div *ngIf="6 <= goesWellWith.length" class="pl-1 d-flex justify-content-center">
+                        <label class="eCommerce-products-goeswwell" style="margin-top: 5px;"><b>Price :</b></label>  
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 5px; margin-left: 15px; text-align: left;" width="16" height="16" fill="currentColor" class="eCommerce-products-goeswwell bi bi-currency-rupee" viewBox="0 0 16 16">
+                            <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"></path>
+                        </svg>
+                        <label class="eCommerce-products-goeswwell d-flex justify-content-center" style="margin-top: 5px;"><b>{{goesWellWithFooterPrice(5)}}</b></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <!-- Goes well with -->
+
+    <br>
+    <br>
+    <br>     
+    <!-- Customer Review -->
+    <div id="review" class="eCommerce-sidebar-home-expand">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 pl-3">    
+                <label class="eCommerce-home-best-selling" style="margin-left: 10px;"><b>Customer Reviews</b></label>
+            </div>
+            <div class="col-2" [class.d-none]="!addComment">
+                <button class="btn eCommerce-nav-button" style="margin-left: 5px;" (click)="onAddComment()"><b>Add Comment</b></button>
+            </div>
+            <div class="col-2" [class.d-none]="addComment">
+                <button class="btn eCommerce-nav-button" style="margin-left: 5px;" (click)="onSubmitComment()"><b>Submit Comment</b></button>
+            </div>
+            <div class="col-2" [class.d-none]="addComment">
+                <button class="btn eCommerce-nav-button" style="margin-left: 5px;" (click)="onCancelComment()"><b>Cancel Comment</b></button>
+            </div>            
+        </div>
+        <br [class.d-none]="addComment">
+        <div class="row">
+            <div [class.d-none]="addComment">
+                <label class="eCommerce-home-heading" style="margin-left: 15px; text-align: left;"><b>Rating :</b></label>
+                <a class="eCommerce-star" style="margin-left: 11px; text-align: left;" *ngIf="rating>=1; else starOne" (click)="onStarClick(1, false)"><b><i class="bi bi-star-fill"></i></b></a>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" *ngIf="rating>=2; else starTwo" (click)="onStarClick(2, false)"><b><i class="bi bi-star-fill"></i></b></a>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" *ngIf="rating>=3; else starThree" (click)="onStarClick(3, false)"><b><i class="bi bi-star-fill"></i></b></a>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" *ngIf="rating>=4; else starFour" (click)="onStarClick(4, false)"><b><i class="bi bi-star-fill"></i></b></a>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" *ngIf="rating>=5; else starFive" (click)="onStarClick(5, false)"><b><i class="bi bi-star-fill"></i></b></a>
+            </div>
+            
+            <ng-template #starOne>
+                <a class="eCommerce-star" style="margin-left: 11px; text-align: left;" (click)="onStarClick(1, true)"><b><i class="bi bi-star"></i></b></a>
+            </ng-template>
+            <ng-template #starTwo>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" (click)="onStarClick(2, true)"><b><i class="bi bi-star"></i></b></a>
+            </ng-template>
+            <ng-template #starThree>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" (click)="onStarClick(3, true)"><b><i class="bi bi-star"></i></b></a>
+            </ng-template>
+            <ng-template #starFour>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" (click)="onStarClick(4, true)"><b><i class="bi bi-star"></i></b></a>
+            </ng-template>
+            <ng-template #starFive>
+                <a class="eCommerce-star" style="margin-left: 4px; text-align: left;" (click)="onStarClick(5, true)"><b><i class="bi bi-star"></i></b></a>
+            </ng-template>                                                
+        </div>
+        <br [class.d-none]="addComment">
+        <div class="row">
+            <textarea [class.d-none]="addComment" style="width:95%; height:100px; margin-left: 21px;" placeholder="Please enter comments here" [(ngModel)]="comment"></textarea>
+        </div>
+        <br [class.d-none]="addComment">
+
+        <div *ngFor="let comment of productDetails.comments | paginate
+        :   {
+                id: 'comment',
+                itemsPerPage: itemsPerPage,
+                currentPage: currentPage,
+                totalItems: totalItems
+            };
+            let i = index">
+            <div class="row">
+                <div class="col-1">
+                    <div class="eCommerce-circle-text" style="margin-left: 21px; margin-top: 10px;">{{comment.firstName[0]}}</div>
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <div>
+                            <label class="eCommerce-home-small-heading" style="margin-left: 1px; text-align: left;"><b>Rating :</b></label>
+                            <a class="eCommerce-home-small-heading" *ngIf="comment.rating>=1; else starEmpty" style="margin-left: 10px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                            <a class="eCommerce-home-small-heading" *ngIf="comment.rating>=2; else starEmpty" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                            <a class="eCommerce-home-small-heading" *ngIf="comment.rating>=3; else starEmpty" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                            <a class="eCommerce-home-small-heading" *ngIf="comment.rating>=4; else starEmpty" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                            <a class="eCommerce-home-small-heading" *ngIf="comment.rating>=5; else starEmpty" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star-fill"></i></b></a>
+                        </div>
+                        <ng-template #starEmpty>
+                            <a class="eCommerce-home-small-heading" style="margin-left: 2px; text-align: left;"><b><i class="bi bi-star"></i></b></a>
+                        </ng-template>                           
+                        <div>
+                            <label class="eCommerce-nav-home-label-font eCommerce-verified" style="margin-left: 1px; text-align: left;"><i class="bi bi-check-lg"></i> Verified <i class="bi bi-check-lg"></i></label>
+                        </div>                    
+                    </div>
+                </div>                    
+            </div>
+
+            <div class="row">
+                <label class="eCommerce-home-small-heading" style="margin-left: 21px; margin-top: 10px; text-align: left;"><b>{{comment.firstName}} {{comment.lastName}}, {{comment.date}}</b></label>
+            </div>
+
+            <div class="row">
+                <label class="eCommerce-products-city" style="margin-left: 21px; margin-top: 1px; text-align: left;"><b>{{comment.city}}, {{comment.state}}</b></label>
+            </div>            
+
+            <div class="row">
+                <label class="eCommerce-home-small-heading" style="margin-left: 21px; margin-top: 10px; text-align: left;">
+                    {{comment.comment}}
+                </label>
+            </div>
+            
+            <div class="row">
+                <label class="eCommerce-home-small-heading" style="margin-left: 21px; margin-top: 10px; text-align: left;"><b>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <pagination-controls id="comment" [class.d-none]="productDetails.comments.length==0" class="eCommerce-pagination d-flex justify-content-center" previousLabel="Prev" nextLabel="Next"(pageChange)="onCommentPageChange($event)"></pagination-controls>      
+        </div>
+        
+    </div>
+    <!-- Customer Review -->
+
+    <!-- Shipping Address -->
+    <div class="modal fade" id="shippingAddressModal" tabindex="-1" aria-labelledby="shippingAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content eCommerce-background">
+            
+                <div class="modal-header d-flex justify-content-center eCommerce-register-navigation" style="height: 10px;">
+                    <h3 class="modal-title fs-5">Shipping Address</h3>
+                </div>
+            
+                <div class="modal-body eCommerce-background eCommerce-round-control">
+                    <div class="container-fluid eCommerce-round-control eCommerce-box-shadow">
+                        &nbsp;
+                        <div class="row" [class.d-none]="loginPincode === ''">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-4">
+                                <label class="form-check-label eCommerce-checkdelivery-text d-flex justify-content-center" style="font-family:Copperplate;font-size:16px;"><b>Please check the deliverable pincode for Product before proceeding by clicking "Check Delivery" button !!</b></label>
+                            </div>
+                        </div>                      
+                        &nbsp;
+                        <div class="row" [class.d-none]="loginPincode === ''">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <input class="form-check-input" [checked]="shoppingAddressIndex === 0" type="radio" style="border: 0.15em solid currentColor;" (click)="onShippingAddress(0)" name="userRole" value="ShippingAddress" />
+                                <label class="form-check-label" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 1</label>
+                                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 0" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>          
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <input class="form-check-input" [checked]="shoppingAddressIndex === 1" [class.d-none]="shippingAddress2.length === 0" style="border: 0.15em solid currentColor;" type="radio" (click)="onShippingAddress(1)" name="userRole" value="ShippingAddress" />
+                                <label class="form-check-label" [class.d-none]="shippingAddress2.length === 0" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 2</label>
+                                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 1" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>
+                                <!--<button class="btn btn-sm eCommerce-nav-button" [class.d-none]="shippingAddress2.length === 0" data-bs-toggle="modal" data-bs-target="#addressModal" style="margin-left: 5px;" (click)="onChangeAddresss(1)"><b>Change Address</b></button>-->
+                            </div>            
+                        </div>
+                        &nbsp;
+                        <div class="row" [class.d-none]="loginPincode === ''">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <textarea id = "shippingAddress1" readonly style="width:100%; height:100px;">{{shippingAddress1}}</textarea>  
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <textarea id = "shippingAddress2" readonly [class.d-none]="shippingAddress2.length === 0" style="width:100%; height:100px;">{{shippingAddress2}}</textarea>   
+                            </div>            
+                        </div>
+                        &nbsp;
+                        
+                        <div class="row" [class.d-none]="loginPincode === ''">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <input class="form-check-input" [checked]="shoppingAddressIndex === 2" type="radio" [class.d-none]="shippingAddress3.length === 0" style="border: 0.15em solid currentColor;" (click)="onShippingAddress(2)" name="userRole" value="ShippingAddress" />
+                                <label class="form-check-label" [class.d-none]="shippingAddress3.length === 0" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 3</label>
+                                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 2" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>                
+                                <!--<button class="btn btn-sm eCommerce-nav-button" [class.d-none]="shippingAddress3.length === 0" data-bs-toggle="modal" data-bs-target="#addressModal" style="margin-left: 5px;" (click)="onChangeAddresss(2)"><b>Change Address</b></button>-->
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <input class="form-check-input" [checked]="shoppingAddressIndex === 3" type="radio" [class.d-none]="shippingAddress4.length === 0" style="border: 0.15em solid currentColor;" (click)="onShippingAddress(3)" name="userRole" value="ShippingAddress" />
+                                <label class="form-check-label" [class.d-none]="shippingAddress4.length === 0" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;Shipping Address 4</label>
+                                <label class="form-check-label" [class.d-none]="shoppingAddressIndex != 3" style="font-family:Copperplate;font-size:18px;color: darkgreen;">&nbsp;&nbsp;<u>(Current)</u>&nbsp;&nbsp;</label>                                
+                                <!--<button class="btn btn-sm eCommerce-nav-button" [class.d-none]="shippingAddress4.length === 0" data-bs-toggle="modal" data-bs-target="#addressModal" style="margin-left: 5px;" (click)="onChangeAddresss(3)"><b>Change Address</b></button>-->
+                            </div>            
+                        </div>
+                        &nbsp;
+                        <div class="row" [class.d-none]="loginPincode === ''">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <textarea id = "shippingAddress3" readonly [class.d-none]="shippingAddress3.length === 0" style="width:100%; height:100px;">{{shippingAddress3}}</textarea>  
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-4">
+                                <textarea id = "shippingAddress4" readonly [class.d-none]="shippingAddress4.length === 0" style="width:100%; height:100px;">{{shippingAddress4}}</textarea>   
+                            </div>            
+                        </div>                          
+                        &nbsp;
+                        <div class="row" [class.d-none]="loginPincode !== ''">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pl-4">
+                                <label class="form-check-label d-flex justify-content-center" style="font-family:Copperplate;font-size:18px;">&nbsp;&nbsp;<b>Dear User,&nbsp;&nbsp;Please register (if not) first and login before purchase !!</b></label>
+                            </div>
+                        </div>
+                        &nbsp;                        
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: 13px;" [class.d-none]="loginPincode === ''"> 
+                                <button class="btn eCommerce-nav-button d-flex justify-content-center" [attr.data-bs-dismiss]="'modal'" style="width:100%;" (click)="onClickBuyNow()">Ok</button>
+                            </div>
+                            
+                            <div class="col-md-6" style="margin-top: 13px;" [class.d-none]="loginPincode !== ''"> 
+                                <button class="btn eCommerce-nav-button d-flex justify-content-center" [attr.data-bs-dismiss]="'modal'" data-bs-toggle="modal" data-bs-target="#loginModal" style="width:100%;">Login</button>
+                            </div>
+
+                            <div class="col-md-6" style="margin-top: 13px;">
+                                <button class="btn eCommerce-nav-button-reverse d-flex justify-content-center" [attr.data-bs-dismiss]="'modal'" style="width:100%;">Cancel</button>
+                            </div>                            
+                        </div>                        
+                        &nbsp;
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>          
+    <!-- Shipping Address -->
+
+    <br>
+    <br>
+    <!-- About Bagwani -->
+    <div id="about" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-about></ecommerce-product-about>
+    </div>
+    <!-- About Bagwani -->
+
+    &nbsp;
+    
+    <!-- Navigation Pane -->
+    <div id="navbar" class="eCommerce-sidebar-home-expand">
+        <ecommerce-product-navigation></ecommerce-product-navigation>
+    </div>
+    <!-- Navigation Pane -->    
+    <br>
+
+    <br>    
+</div>
